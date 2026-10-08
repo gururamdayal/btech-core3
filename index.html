@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.Tech Core OS | Engineering Notes & Developer Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .grid-pattern { background-image: radial-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px); background-size: 24px 24px; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased grid-pattern min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+    <!-- Navbar -->
+    <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between py-3">
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-br from-blue-600 to-indigo-600 text-white p-2.5 rounded-xl shadow-lg shadow-blue-500/20 border border-blue-400/30">
+                    <i class="fa-solid fa-terminal text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-blue-400 bg-clip-text text-transparent">B.TECH<span class="text-blue-500">.CORE</span></span>
+                    <span class="block text-[10px] text-slate-400 font-mono tracking-widest uppercase">Engineering Cloud v3.2</span>
+                </div>
+            </div>
+
+            <!-- Server Status Badge -->
+            <div class="hidden md:flex items-center space-x-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full text-xs font-mono text-slate-300">
+                <span id="statusIndicator" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="authStatusText">Mode: <strong class="text-white">Student (Read-Only)</strong></span>
+            </div>
+
+            <!-- Nav Actions -->
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleAdminSession()" id="adminToggleBtn" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-lg shadow-lg shadow-blue-600/30 transition flex items-center space-x-2 border border-blue-400/30 font-mono">
+                    <i class="fa-solid fa-lock" id="adminBtnIcon"></i>
+                    <span id="adminBtnText">Login / Register</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-14 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono mb-6">
+                <i class="fa-solid fa-code-branch"></i>
+                <span>CSE • ECE • MECH • CIVIL • EE SEMESTER REPO</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                Engineering Blueprint & <br><span class="bg-gradient-to-r from-blue-400 via-indigo-400 to-cyan-400 bg-clip-text text-transparent">Cloud Utility Toolkit</span>
+            </h1>
+            <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-10 font-normal">
+                Real-time synced lecture notes powered by Firebase Firestore.
+            </p>
+
+            <!-- Search Console -->
+            <div class="bg-slate-900/90 border border-slate-800 p-2 rounded-2xl shadow-2xl flex items-center max-w-2xl mx-auto backdrop-blur-xl">
+                <div class="pl-3 text-blue-500 font-mono text-sm">$</div>
+                <input type="text" id="searchInput" placeholder="Search by subject code, tool name, or branch..." class="w-full bg-transparent px-3 py-2 text-slate-100 placeholder-slate-500 focus:outline-none text-sm font-mono">
+                <button onclick="renderItems()" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl font-medium text-xs font-mono tracking-wider transition uppercase shadow-md shadow-blue-600/20">Query</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+        
+        <!-- Filter Bar -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-slate-900">
+            <div class="flex items-center space-x-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
+                <button onclick="filterCategory('all')" id="btn-all" class="cat-btn bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider shadow-lg shadow-blue-600/20 transition">All Modules</button>
+                <button onclick="filterCategory('notes')" id="btn-notes" class="cat-btn bg-slate-900 text-slate-400 border border-slate-800 px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider hover:bg-slate-800 hover:text-white transition">Lecture Notes</button>
+                <button onclick="filterCategory('tool')" id="btn-tool" class="cat-btn bg-slate-900 text-slate-400 border border-slate-800 px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider hover:bg-slate-800 hover:text-white transition">Engg Tools</button>
+            </div>
+            <div class="text-xs font-mono text-slate-500 flex items-center space-x-2">
+                <span>DATABASE: <strong id="dbStatus" class="text-amber-400">CONNECTING...</strong></span>
+            </div>
+        </div>
+
+        <!-- Grid Container -->
+        <div id="contentGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic items will load here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs font-mono text-slate-500">
+        <p>&copy; 2026 B.Tech Core Platform. Real-time Cloud Firestore Active.</p>
+    </footer>
+
+    <!-- ================= ADMIN UPLOAD PANEL SECTION ================= -->
+    <div id="adminPanelSection" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        <div class="bg-slate-900 border border-blue-500/40 rounded-2xl p-6 shadow-2xl relative">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-blue-600/20 text-blue-400 border border-blue-500/30 p-2.5 rounded-xl">
+                        <i class="fa-solid fa-cloud-arrow-up text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-100 font-mono">FIRESTORE CLOUD REGISTRY</h3>
+                        <p id="portalSubtitle" class="text-xs text-slate-400">Add notes links and tools directly to cloud database.</p>
+                    </div>
+                </div>
+                <button onclick="logoutSession()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-mono px-3 py-1.5 rounded-lg transition">
+                    Logout
+                </button>
+            </div>
+
+            <form id="uploadForm" class="space-y-4 font-mono text-xs">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-400 uppercase mb-1">Module Category</label>
+                        <select id="uploadType" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-200 focus:outline-none focus:border-blue-500">
+                            <option value="notes">Lecture Notes (PDF Link)</option>
+                            <option value="tool">Engineering Web Tool / Link</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 uppercase mb-1">Title</label>
+                        <input type="text" id="uploadTitle" placeholder="e.g. Operating Systems Core Notes" required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-200 focus:outline-none focus:border-blue-500 font-sans text-sm">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-400 uppercase mb-1">Branch / Semester</label>
+                        <input type="text" id="uploadBranch" placeholder="e.g. CSE • SEM 04" required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-200 focus:outline-none focus:border-blue-500 font-sans text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 uppercase mb-1">Target URL / Drive Link / File Link</label>
+                        <input type="url" id="uploadLink" placeholder="https://..." required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-200 focus:outline-none focus:border-blue-500 font-sans text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-slate-400 uppercase mb-1">Module Abstract</label>
+                    <textarea id="uploadDesc" rows="2" placeholder="Summary of contents..." class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-200 focus:outline-none focus:border-blue-500 font-sans text-sm"></textarea>
+                </div>
+                <button type="submit" id="uploadBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-lg transition shadow-lg shadow-blue-600/30 uppercase tracking-wider">
+                    Save to Cloud Database
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="passwordModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <button onclick="closeModal('passwordModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="bg-blue-500/20 text-blue-400 border border-blue-500/30 w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                    <i class="fa-solid fa-user-lock"></i>
+                </div>
+                <h3 class="text-base font-bold text-slate-100 font-mono">PORTAL LOGIN</h3>
+                <p class="text-xs text-slate-400 mt-1">Enter email & your password.</p>
+            </div>
+            <form onsubmit="handleLogin(event)" class="space-y-4 font-mono text-xs">
+                <div>
+                    <input type="email" id="loginEmail" placeholder="Your Email..." required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-200 focus:outline-none focus:border-blue-500 font-sans text-sm mb-3">
+                    <input type="password" id="loginPass" placeholder="Password..." required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-200 focus:outline-none focus:border-blue-500 font-sans text-sm tracking-widest mb-2">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-lg transition shadow-lg uppercase tracking-wider">
+                    Login / Register
+                </button>
+                <div class="text-center mt-3">
+                    <button type="button" onclick="openForgotModal()" class="text-blue-400 hover:underline text-[11px]">Forgot Password?</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl relative">
+            <button onclick="closeModal('forgotModal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="bg-amber-500/20 text-amber-400 border border-amber-500/30 w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                    <i class="fa-solid fa-key"></i>
+                </div>
+                <h3 class="text-base font-bold text-slate-100 font-mono">RESET PASSWORD</h3>
+                <p class="text-xs text-slate-400 mt-1">Requires Special Password (369)</p>
+            </div>
+            <form onsubmit="handleResetPassword(event)" class="space-y-4 font-mono text-xs">
+                <div>
+                    <input type="email" id="forgotEmail" placeholder="Registered Email..." required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-200 focus:outline-none focus:border-amber-500 font-sans text-sm mb-3">
+                    <input type="password" id="specialPin" placeholder="Special Password (369)..." required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-200 focus:outline-none focus:border-amber-500 font-sans text-sm tracking-widest mb-3">
+                    <input type="password" id="newPass" placeholder="New Password..." required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-slate-200 focus:outline-none focus:border-amber-500 font-sans text-sm tracking-widest">
+                </div>
+                <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-lg transition shadow-lg uppercase tracking-wider">
+                    Reset Password
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Logged-in User Dashboard Bar -->
+    <div id="studentDashboardBar" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 w-full">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between font-mono text-xs">
+            <div>
+                <span class="text-slate-400">Logged in as:</span> <strong id="loggedInUserDisplay" class="text-blue-400"></strong>
+            </div>
+            <button onclick="logoutSession()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-3 py-1.5 rounded-lg transition">
+                Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Firebase Script Engine -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, getDocs, query, where, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDrTn8aGV5EIa8s6MNRcmRweIEtfvFkBYk",
+            authDomain: "engineering-portal-8ea04.firebaseapp.com",
+            projectId: "engineering-portal-8ea04",
+            storageBucket: "engineering-portal-8ea04.firebasestorage.app",
+            messagingSenderId: "403752061495",
+            appId: "1:403752061495:web:2876ebc1476ee2eb04cdb2",
+            measurementId: "G-JQCKN7W9RF"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let currentCategory = 'all';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            checkLoginState();
+            initRealtimeSync();
+            document.getElementById('dbStatus').innerText = "CONNECTED (REAL-TIME)";
+            document.getElementById('dbStatus').className = "text-emerald-400";
+        });
+
+        window.openModal = function(id) { document.getElementById(id).classList.remove('hidden'); }
+        window.closeModal = function(id) { document.getElementById(id).classList.add('hidden'); }
+
+        window.openForgotModal = function() {
+            closeModal('passwordModal');
+            openModal('forgotModal');
+        }
+
+        window.checkLoginState = function() {
+            const isLoggedIn = localStorage.getItem('btech_logged_in') === 'true';
+            const loggedEmail = (localStorage.getItem('btech_user_email') || '').trim().toLowerCase();
+            const panel = document.getElementById('adminPanelSection');
+            const studentBar = document.getElementById('studentDashboardBar');
+            const btnText = document.getElementById('adminBtnText');
+            const btnIcon = document.getElementById('adminBtnIcon');
+            const statusText = document.getElementById('authStatusText');
+
+            if (isLoggedIn) {
+                btnText.innerText = 'Account Active';
+                btnIcon.className = 'fa-solid fa-user-check text-emerald-400';
+                
+                if (loggedEmail === 'ramdayalguru99@gmail.com') {
+                    panel.classList.remove('hidden');
+                    studentBar.classList.add('hidden');
+                    statusText.innerHTML = 'Mode: <strong class="text-emerald-400">Master Admin (Full Access)</strong>';
+                } else {
+                    panel.classList.add('hidden');
+                    studentBar.classList.remove('hidden');
+                    document.getElementById('loggedInUserDisplay').innerText = loggedEmail;
+                    statusText.innerHTML = `Mode: <strong class="text-blue-400">Student (${loggedEmail})</strong>`;
+                }
+            } else {
+                panel.classList.add('hidden');
+                studentBar.classList.add('hidden');
+                btnText.innerText = 'Login / Register';
+                btnIcon.className = 'fa-solid fa-lock';
+                statusText.innerHTML = 'Mode: <strong class="text-white">Student (Read-Only)</strong>';
+            }
+        }
+
+        window.toggleAdminSession = function() {
+            const isLoggedIn = localStorage.getItem('btech_logged_in') === 'true';
+            if (isLoggedIn) {
+                const loggedEmail = (localStorage.getItem('btech_user_email') || '').trim().toLowerCase();
+                if (loggedEmail === 'ramdayalguru99@gmail.com') {
+                    document.getElementById('adminPanelSection').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    alert(`Aap ${loggedEmail} se logged in hain.`);
+                }
+            } else {
+                openModal('passwordModal');
+            }
+        }
+
+        window.handleLogin = async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const pass = document.getElementById('loginPass').value;
+
+            try {
+                // Firestore se check karo ki user pehle se registered hai ya nahi
+                const usersRef = collection(db, "users");
+                const q = query(usersRef, where("email", "==", email));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    // Agar naya user hai, toh Firestore me save kar do
+                    await setDoc(doc(db, "users", email), { email: email, password: pass });
+                    localStorage.setItem('btech_logged_in', 'true');
+                    localStorage.setItem('btech_user_email', email);
+                    closeModal('passwordModal');
+                    document.getElementById('loginEmail').value = '';
+                    document.getElementById('loginPass').value = '';
+                    checkLoginState();
+                    renderItems();
+                    alert('Account create ho gaya aur login ho gaye!');
+                } else {
+                    let userData = null;
+                    querySnapshot.forEach((doc) => { userData = doc.data(); });
+
+                    if (userData.password === pass) {
+                        localStorage.setItem('btech_logged_in', 'true');
+                        localStorage.setItem('btech_user_email', email);
+                        closeModal('passwordModal');
+                        document.getElementById('loginEmail').value = '';
+                        document.getElementById('loginPass').value = '';
+                        checkLoginState();
+                        renderItems();
+                        alert('Login successful!');
+                    } else {
+                        // Galat password hone par forgot password modal khulega
+                        closeModal('passwordModal');
+                        document.getElementById('forgotEmail').value = email;
+                        document.getElementById('specialPin').value = '';
+                        document.getElementById('newPass').value = '';
+                        openModal('forgotModal');
+                        alert('Galat password! Password reset karne ke liye Special Password (369) enter karein.');
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Login error: ' + err.message);
+            }
+        }
+
+        window.handleResetPassword = async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgotEmail').value.trim().toLowerCase();
+            const pin = document.getElementById('specialPin').value.trim();
+            const newPass = document.getElementById('newPass').value;
+
+            if (pin === '369') {
+                try {
+                    await setDoc(doc(db, "users", email), { email: email, password: newPass }, { merge: true });
+                    localStorage.setItem('btech_logged_in', 'true');
+                    localStorage.setItem('btech_user_email', email);
+                    alert('Password successfully reset ho gaya aur aap login ho chuke hain!');
+                    closeModal('forgotModal');
+                    checkLoginState();
+                    renderItems();
+                } catch (err) {
+                    console.error(err);
+                    alert('Reset error: ' + err.message);
+                }
+            } else {
+                alert('Galat Special Password (369)! Aap password reset nahi kar sakte.');
+            }
+        }
+
+        window.logoutSession = function() {
+            localStorage.setItem('btech_logged_in', 'false');
+            localStorage.removeItem('btech_user_email');
+            checkLoginState();
+            renderItems();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            alert('Aap successfully logout ho chuke hain.');
+        }
+
+        // Real-time Firestore Sync for Modules
+        function initRealtimeSync() {
+            const grid = document.getElementById('contentGrid');
+            grid.innerHTML = `<div class="col-span-3 text-center py-10 font-mono text-slate-500">Connecting live feed...</div>`;
+
+            onSnapshot(collection(db, "modules"), (querySnapshot) => {
+                window.cloudItems = [];
+                querySnapshot.forEach((docSnap) => {
+                    window.cloudItems.push({ id: docSnap.id, ...docSnap.data() });
+                });
+                renderItems();
+            }, (err) => {
+                console.error(err);
+                grid.innerHTML = `<div class="col-span-3 text-center py-10 font-mono text-red-400">Error connecting to Firebase Firestore.</div>`;
+            });
+        }
+
+        window.renderItems = function() {
+            const grid = document.getElementById('contentGrid');
+            const items = window.cloudItems || [];
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            const loggedEmail = (localStorage.getItem('btech_user_email') || '').trim().toLowerCase();
+            const isLoggedIn = localStorage.getItem('btech_logged_in') === 'true';
+            
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="col-span-3 text-center py-10 font-mono text-slate-500">No modules uploaded yet.</div>`;
+                return;
+            }
+
+            items.forEach((item) => {
+                if (currentCategory !== 'all' && item.type !== currentCategory) return;
+                
+                const fullText = (item.title + " " + item.branch).toLowerCase();
+                if (searchQuery && !fullText.includes(searchQuery)) return;
+
+                const isNotes = item.type === 'notes';
+                const badgeColor = isNotes ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
+                const btnColor = isNotes ? 'hover:bg-blue-600' : 'hover:bg-emerald-600';
+                const actionText = isNotes ? 'DOWNLOAD PDF' : 'LAUNCH TOOL';
+                const actionIcon = isNotes ? 'fa-download' : 'fa-arrow-up-right-from-square';
+
+                const canDelete = isLoggedIn && loggedEmail === 'ramdayalguru99@gmail.com';
+                const deleteBtn = canDelete ? `<button onclick="deleteCloudItem('${item.id}')" class="text-red-400 hover:text-red-300 text-xs font-mono ml-2 p-1"><i class="fa-solid fa-trash"></i></button>` : '';
+
+                const card = document.createElement('div');
+                card.className = "item-card bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 flex flex-col justify-between hover:border-blue-500/50 transition group";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="${badgeColor} border text-[10px] font-mono px-2.5 py-1 rounded uppercase tracking-wider">${item.branch}</span>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-slate-500 text-xs font-mono">Synced Live</span>
+                                ${deleteBtn}
+                            </div>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-100 group-hover:text-blue-400 transition mb-2">${item.title}</h3>
+                        <p class="text-xs text-slate-400 mb-6 leading-relaxed">${item.desc || 'No description added.'}</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-800/60">
+                        <div class="flex items-center space-x-1.5 text-[11px] font-mono text-emerald-400">
+                            <i class="fa-solid fa-cloud"></i>
+                            <span>Cloud Live</span>
+                        </div>
+                        <a href="${item.link}" target="_blank" class="bg-slate-800 ${btnColor} text-slate-200 hover:text-white text-xs font-mono px-3.5 py-2 rounded-lg transition flex items-center space-x-1.5 border border-slate-700 hover:border-transparent">
+                            <span>${actionText}</span>
+                            <i class="fa-solid ${actionIcon} text-[10px]"></i>
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.filterCategory = function(category) {
+            currentCategory = category;
+            ['all', 'notes', 'tool'].forEach(cat => {
+                const btn = document.getElementById('btn-' + cat);
+                if (cat === category) {
+                    btn.className = "cat-btn bg-blue-600 text-white px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider shadow-lg shadow-blue-600/20 transition";
+                } else {
+                    btn.className = "cat-btn bg-slate-900 text-slate-400 border border-slate-800 px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-wider hover:bg-slate-800 hover:text-white transition";
+                }
+            });
+            renderItems();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', () => {
+            renderItems();
+        });
+
+        // Upload Form Handler
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const loggedEmail = (localStorage.getItem('btech_user_email') || '').trim().toLowerCase();
+
+            if (loggedEmail !== 'ramdayalguru99@gmail.com') {
+                alert('Access Denied! Sirf ramdayalguru99@gmail.com upload kar sakta hai.');
+                return;
+            }
+
+            const type = document.getElementById('uploadType.value' || 'uploadType').value;
+            const title = document.getElementById('uploadTitle').value;
+            const branch = document.getElementById('uploadBranch').value;
+            const link = document.getElementById('uploadLink').value;
+            const desc = document.getElementById('uploadDesc').value;
+            const uploadBtn = document.getElementById('uploadBtn');
+
+            uploadBtn.innerText = "SAVING TO CLOUD...";
+            uploadBtn.disabled = true;
+
+            try {
+                await addDoc(collection(db, "modules"), {
+                    type,
+                    title,
+                    branch,
+                    link,
+                    desc,
+                    createdAt: new Date().toISOString()
+                });
+
+                alert('Successfully added to Firestore Cloud Database!');
+                document.getElementById('uploadForm').reset();
+            } catch (err) {
+                console.error(err);
+                alert('Save failed: ' + err.message);
+            } finally {
+                uploadBtn.innerText = "Save to Cloud Database";
+                uploadBtn.disabled = false;
+            }
+        });
+
+        // Delete from Cloud
+        window.deleteCloudItem = async function(id) {
+            const loggedEmail = (localStorage.getItem('btech_user_email') || '').trim().toLowerCase();
+            if (loggedEmail !== 'ramdayalguru99@gmail.com') {
+                alert('Access Denied!');
+                return;
+            }
+
+            if (confirm('Kya aap is module ko delete karna chahte hain?')) {
+                try {
+                    await deleteDoc(doc(db, "modules", id));
+                    alert('Module deleted successfully!');
+                } catch (err) {
+                    console.error(err);
+                    alert('Delete failed: ' + err.message);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
