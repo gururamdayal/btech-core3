@@ -38,7 +38,7 @@
                 </div>
                 <div>
                     <span class="text-lg font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-blue-400 bg-clip-text text-transparent">B.TECH<span class="text-blue-500">.CORE</span></span>
-                    <span class="block text-[10px] text-slate-400 font-mono tracking-widest uppercase">Engineering Cloud v3.2</span>
+                    <span class="block text-[10px] text-slate-400 font-mono tracking-widest uppercase">Engineering Cloud v3.3</span>
                 </div>
             </div>
 
@@ -117,7 +117,7 @@
                     </div>
                     <div>
                         <h3 class="text-base font-bold text-slate-100 font-mono">FIRESTORE CLOUD REGISTRY</h3>
-                        <p id="portalSubtitle" class="text-xs text-slate-400">Add notes links and tools directly to cloud database.</p>
+                        <p id="portalSubtitle" class="text-xs text-slate-400">Upload PDF files or tools directly to cloud database.</p>
                     </div>
                 </div>
                 <button onclick="logoutSession()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-mono px-3 py-1.5 rounded-lg transition">
@@ -130,7 +130,7 @@
                     <div>
                         <label class="block text-slate-400 uppercase mb-1">Module Category</label>
                         <select id="uploadType" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-200 focus:outline-none focus:border-blue-500">
-                            <option value="notes">Lecture Notes (PDF Link)</option>
+                            <option value="notes">Lecture Notes (Upload PDF / File)</option>
                             <option value="tool">Engineering Web Tool / Link</option>
                         </select>
                     </div>
@@ -145,8 +145,9 @@
                         <input type="text" id="uploadBranch" placeholder="e.g. CSE • SEM 04" required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-200 focus:outline-none focus:border-blue-500 font-sans text-sm">
                     </div>
                     <div>
-                        <label class="block text-slate-400 uppercase mb-1">Target URL / Drive Link / File Link</label>
-                        <input type="url" id="uploadLink" placeholder="https://..." required class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-200 focus:outline-none focus:border-blue-500 font-sans text-sm">
+                        <label class="block text-slate-400 uppercase mb-1" id="fileOrLinkLable">Select File (PDF / Doc) OR Enter URL</label>
+                        <input type="file" id="uploadFileInput" accept=".pdf,.doc,.docx,.zip,.txt,.png,.jpg" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-200 focus:outline-none focus:border-blue-500 font-sans text-xs file:mr-4 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500 cursor-pointer">
+                        <input type="url" id="uploadLink" placeholder="Or enter https:// link..." class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-200 focus:outline-none focus:border-blue-500 font-sans text-sm mt-2 hidden">
                     </div>
                 </div>
                 <div>
@@ -253,6 +254,28 @@
             document.getElementById('dbStatus').className = "text-emerald-400";
         });
 
+        // Toggle category dropdown change for file vs URL input
+        document.getElementById('uploadType').addEventListener('change', (e) => {
+            const val = e.target.value;
+            const fileInput = document.getElementById('uploadFileInput');
+            const linkInput = document.getElementById('uploadLink');
+            const label = document.getElementById('fileOrLinkLable');
+
+            if (val === 'tool') {
+                fileInput.classList.add('hidden');
+                fileInput.required = false;
+                linkInput.classList.remove('hidden');
+                linkInput.required = true;
+                label.innerText = "Target Web Tool URL";
+            } else {
+                fileInput.classList.remove('hidden');
+                fileInput.required = true;
+                linkInput.classList.add('hidden');
+                linkInput.required = false;
+                label.innerText = "Select File (PDF / Doc) OR Enter URL";
+            }
+        });
+
         window.openModal = function(id) { document.getElementById(id).classList.remove('hidden'); }
         window.closeModal = function(id) { document.getElementById(id).classList.add('hidden'); }
 
@@ -313,13 +336,11 @@
             const pass = document.getElementById('loginPass').value;
 
             try {
-                // Firestore se check karo ki user pehle se registered hai ya nahi
                 const usersRef = collection(db, "users");
                 const q = query(usersRef, where("email", "==", email));
                 const querySnapshot = await getDocs(q);
 
                 if (querySnapshot.empty) {
-                    // Agar naya user hai, toh Firestore me save kar do
                     await setDoc(doc(db, "users", email), { email: email, password: pass });
                     localStorage.setItem('btech_logged_in', 'true');
                     localStorage.setItem('btech_user_email', email);
@@ -343,7 +364,6 @@
                         renderItems();
                         alert('Login successful!');
                     } else {
-                        // Galat password hone par forgot password modal khulega
                         closeModal('passwordModal');
                         document.getElementById('forgotEmail').value = email;
                         document.getElementById('specialPin').value = '';
@@ -391,7 +411,6 @@
             alert('Aap successfully logout ho chuke hain.');
         }
 
-        // Real-time Firestore Sync for Modules
         function initRealtimeSync() {
             const grid = document.getElementById('contentGrid');
             grid.innerHTML = `<div class="col-span-3 text-center py-10 font-mono text-slate-500">Connecting live feed...</div>`;
@@ -431,7 +450,7 @@
                 const isNotes = item.type === 'notes';
                 const badgeColor = isNotes ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
                 const btnColor = isNotes ? 'hover:bg-blue-600' : 'hover:bg-emerald-600';
-                const actionText = isNotes ? 'DOWNLOAD PDF' : 'LAUNCH TOOL';
+                const actionText = isNotes ? 'DOWNLOAD / VIEW' : 'LAUNCH TOOL';
                 const actionIcon = isNotes ? 'fa-download' : 'fa-arrow-up-right-from-square';
 
                 const canDelete = isLoggedIn && loggedEmail === 'ramdayalguru99@gmail.com';
@@ -457,7 +476,7 @@
                             <i class="fa-solid fa-cloud"></i>
                             <span>Cloud Live</span>
                         </div>
-                        <a href="${item.link}" target="_blank" class="bg-slate-800 ${btnColor} text-slate-200 hover:text-white text-xs font-mono px-3.5 py-2 rounded-lg transition flex items-center space-x-1.5 border border-slate-700 hover:border-transparent">
+                        <a href="${item.link}" target="_blank" download class="bg-slate-800 ${btnColor} text-slate-200 hover:text-white text-xs font-mono px-3.5 py-2 rounded-lg transition flex items-center space-x-1.5 border border-slate-700 hover:border-transparent">
                             <span>${actionText}</span>
                             <i class="fa-solid ${actionIcon} text-[10px]"></i>
                         </a>
@@ -484,7 +503,7 @@
             renderItems();
         });
 
-        // Upload Form Handler
+        // Upload Form Handler with Base64 File Conversion (Direct File Upload)
         document.getElementById('uploadForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const loggedEmail = (localStorage.getItem('btech_user_email') || '').trim().toLowerCase();
@@ -494,31 +513,51 @@
                 return;
             }
 
-            const type = document.getElementById('uploadType.value' || 'uploadType').value;
+            const type = document.getElementById('uploadType').value;
             const title = document.getElementById('uploadTitle').value;
             const branch = document.getElementById('uploadBranch').value;
-            const link = document.getElementById('uploadLink').value;
             const desc = document.getElementById('uploadDesc').value;
             const uploadBtn = document.getElementById('uploadBtn');
+            const fileInput = document.getElementById('uploadFileInput');
+            const linkInput = document.getElementById('uploadLink');
 
-            uploadBtn.innerText = "SAVING TO CLOUD...";
+            uploadBtn.innerText = "UPLOADING FILE TO CLOUD...";
             uploadBtn.disabled = true;
 
             try {
+                let finalLink = "";
+
+                if (type === 'tool') {
+                    finalLink = linkInput.value;
+                } else {
+                    const file = fileInput.files[0];
+                    if (file) {
+                        // Convert file to Base64 data URL so it stores directly in Firestore without needing Firebase Storage bucket setup
+                        finalLink = await new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.onload = () => resolve(reader.result);
+                            reader.onerror = error => reject(error);
+                            reader.readAsDataURL(file);
+                        });
+                    } else {
+                        throw new Error("Kripya ek file select karein.");
+                    }
+                }
+
                 await addDoc(collection(db, "modules"), {
                     type,
                     title,
                     branch,
-                    link,
+                    link: finalLink,
                     desc,
                     createdAt: new Date().toISOString()
                 });
 
-                alert('Successfully added to Firestore Cloud Database!');
+                alert('File successfully uploaded to Firestore Database!');
                 document.getElementById('uploadForm').reset();
             } catch (err) {
                 console.error(err);
-                alert('Save failed: ' + err.message);
+                alert('Upload failed: ' + err.message);
             } finally {
                 uploadBtn.innerText = "Save to Cloud Database";
                 uploadBtn.disabled = false;
