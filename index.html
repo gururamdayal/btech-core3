@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>B.Tech AIML Core OS | Engineering Notes & Developer Hub</title>
-
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
+        
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -37,6 +37,578 @@
         rel="stylesheet">
 
     <style>
+        
+/* ==========================================
+   MOBILE RESPONSIVE FIX — B.TECH AIML HUB
+   ========================================== */
+
+/* Prevent layout overflow */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    overflow-x: clip;
+    overflow-y: auto;
+}
+
+body,
+main,
+section,
+header,
+footer,
+.dev-shell {
+    min-width: 0;
+}
+
+img,
+video,
+iframe,
+canvas,
+svg {
+    max-width: 100%;
+}
+
+input,
+textarea,
+select,
+button {
+    max-width: 100%;
+    min-width: 0;
+    font: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+/* Keep flex and grid children inside their containers */
+.flex > *,
+.grid > * {
+    min-width: 0;
+}
+
+.grid {
+    min-width: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+span,
+strong,
+td,
+th {
+    overflow-wrap: anywhere;
+}
+
+/* Header / Navbar */
+header {
+    width: 100%;
+    max-width: 100%;
+}
+
+header > div {
+    min-width: 0;
+    gap: 10px;
+}
+
+header .flex.items-center.space-x-3 {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+header .flex.items-center.space-x-2 {
+    flex: 0 0 auto;
+}
+
+#themeToggleBtn {
+    flex-shrink: 0;
+}
+
+#adminToggleBtn {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+/* Hero section */
+section {
+    min-width: 0;
+}
+
+section .grid {
+    align-items: center;
+}
+
+h1 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.dev-badge {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.5;
+}
+
+/* Terminal: prevent long commands from breaking layout */
+.dev-terminal {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+}
+
+.dev-terminal .terminal-bar {
+    min-width: 0;
+    gap: 8px;
+}
+
+.dev-terminal .terminal-bar > span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.dev-terminal .p-5 {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+#terminalTyping {
+    overflow-wrap: anywhere;
+}
+
+/* Search bar */
+#searchInput {
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+#searchInput::placeholder {
+    font-size: 12px;
+}
+
+#contentGrid {
+    width: 100%;
+    min-width: 0;
+}
+
+.item-card {
+    width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.item-card a {
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.item-card .flex.items-center.justify-between {
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Category navigation */
+.cat-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.flex.items-center.space-x-2.overflow-x-auto {
+    max-width: 100%;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Admin form */
+#adminPanelSection,
+#studentDashboardBar {
+    min-width: 0;
+    max-width: 100%;
+}
+
+#uploadForm > div,
+#uploadForm .grid {
+    min-width: 0;
+}
+
+#uploadFileInput {
+    width: 100%;
+    font-size: 12px;
+}
+
+#uploadDesc,
+#studentMsgText {
+    width: 100%;
+    resize: vertical;
+    overflow-wrap: anywhere;
+}
+
+/* Modals */
+.modal-backdrop {
+    padding: 12px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 100%;
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+#usersModal .modal-box {
+    min-height: 0;
+}
+
+#usersModal table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#usersModal th,
+#usersModal td {
+    padding-left: 6px;
+    padding-right: 6px;
+    overflow-wrap: anywhere;
+}
+
+/* Dashboard and footer */
+#studentDashboardBar > div,
+#adminPanelSection > div {
+    min-width: 0;
+    max-width: 100%;
+}
+
+footer .flex {
+    min-width: 0;
+}
+
+.dev-command {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+}
+
+#dbStatus {
+    overflow-wrap: anywhere;
+}
+
+/* Tablets and smaller screens */
+@media (max-width: 768px) {
+    header > div {
+        padding-left: 12px;
+        padding-right: 12px;
+        gap: 8px;
+    }
+
+    #adminToggleBtn {
+        padding: 9px 10px;
+        font-size: 10px;
+        letter-spacing: 0;
+    }
+
+    #themeToggleBtn {
+        width: 38px;
+        height: 38px;
+    }
+
+    section {
+        padding-top: 38px;
+        padding-bottom: 38px;
+    }
+
+    section h1 {
+        font-size: clamp(36px, 8vw, 58px);
+        line-height: 1.08;
+    }
+
+    .dev-terminal {
+        animation: none;
+    }
+
+    .dev-stat:hover {
+        transform: none;
+    }
+
+    #contentGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .item-card {
+        padding: 16px;
+    }
+
+    #adminPanelSection,
+    #studentDashboardBar {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    header > div {
+        padding: 10px;
+        gap: 6px;
+    }
+
+    header .flex.items-center.space-x-3 {
+        gap: 8px;
+    }
+
+    header .bg-gradient-to-br {
+        padding: 8px;
+        border-radius: 10px;
+    }
+
+    header .text-lg {
+        font-size: 14px;
+        letter-spacing: 0;
+    }
+
+    header .text-\[10px\] {
+        font-size: 8px;
+        letter-spacing: 0;
+    }
+
+    #themeToggleBtn {
+        width: 34px;
+        height: 34px;
+    }
+
+    #adminToggleBtn {
+        padding: 9px 8px;
+        font-size: 9px;
+        gap: 5px;
+    }
+
+    section {
+        padding: 30px 12px;
+    }
+
+    section h1 {
+        font-size: clamp(34px, 10vw, 46px);
+        line-height: 1.08;
+        letter-spacing: -1px;
+    }
+
+    section p {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .dev-command {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+    .dev-terminal .p-5 {
+        padding: 14px;
+        font-size: 11px;
+        line-height: 1.8;
+    }
+
+    .grid.grid-cols-2.lg\:grid-cols-4 {
+        gap: 8px;
+    }
+
+    .dev-stat {
+        padding: 12px;
+    }
+
+    .dev-stat .text-2xl {
+        font-size: 21px;
+    }
+
+    #searchInput {
+        font-size: 12px;
+        padding-left: 8px;
+        padding-right: 5px;
+    }
+
+    #searchInput::placeholder {
+        font-size: 10px;
+    }
+
+    #contentGrid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+    }
+
+    .item-card {
+        padding: 17px;
+    }
+
+    .item-card h3 {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .item-card p {
+        line-height: 1.7;
+    }
+
+    .item-card .flex.items-center.justify-between {
+        align-items: flex-start;
+    }
+
+    .item-card a {
+        padding: 9px 10px;
+        font-size: 10px;
+    }
+
+    #adminPanelSection,
+    #studentDashboardBar {
+        padding: 16px 10px;
+    }
+
+    #adminPanelSection .p-6,
+    #studentDashboardBar .p-6 {
+        padding: 15px;
+    }
+
+    #adminPanelSection h3,
+    #studentDashboardBar h3 {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    #uploadForm input,
+    #uploadForm select,
+    #uploadForm textarea {
+        font-size: 14px;
+    }
+
+    .modal-backdrop {
+        padding: 10px;
+        align-items: center;
+    }
+
+    .modal-box {
+        padding: 20px 15px;
+        max-height: calc(100dvh - 20px);
+    }
+
+    #usersModal .modal-box {
+        padding: 18px 10px;
+    }
+
+    #usersModal table {
+        font-size: 10px;
+    }
+
+    #usersModal th,
+    #usersModal td {
+        padding: 10px 4px;
+    }
+
+    footer {
+        padding: 24px 12px;
+    }
+
+    footer .flex {
+        gap: 14px;
+    }
+
+    footer .inline-flex {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    footer .text-\[11px\] {
+        font-size: 10px;
+    }
+}
+
+/* Extra-small phones */
+@media (max-width: 360px) {
+    header > div {
+        gap: 5px;
+    }
+
+    header .text-lg {
+        font-size: 12px;
+    }
+
+    header .flex.items-center.space-x-3 {
+        gap: 5px;
+    }
+
+    #adminToggleBtn {
+        padding: 8px 6px;
+        font-size: 8px;
+    }
+
+    #themeToggleBtn {
+        width: 30px;
+        height: 30px;
+    }
+
+    section h1 {
+        font-size: 32px;
+    }
+
+    .dev-badge {
+        font-size: 9px;
+    }
+
+    #contentGrid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dev-stat .text-2xl {
+        font-size: 18px;
+    }
+}
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 
         /* ===============================
            COMMON
@@ -477,6 +1049,36 @@
             opacity: .55;
         }
 
+
+
+/* PRIVATE FILE VAULT — responsive additions */
+.vault-wrap{width:min(100% - 2rem,80rem);margin:2rem auto 2.5rem;}
+.vault-panel{position:relative;overflow:hidden;border:1px solid rgba(34,211,238,.28);border-radius:1.5rem;background:linear-gradient(135deg,rgba(15,23,42,.98),rgba(17,24,39,.96) 55%,rgba(30,41,59,.96));box-shadow:0 20px 60px rgba(0,0,0,.24);}
+.vault-panel:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,#22d3ee,#6366f1,transparent);}
+.vault-inner{position:relative;padding:clamp(1rem,3vw,2rem);}
+.vault-kicker{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(34,211,238,.25);border-radius:999px;padding:.35rem .7rem;color:#67e8f9;background:rgba(8,145,178,.1);font:700 .7rem/1.2 'Fira Code',monospace;letter-spacing:.08em;}
+.vault-title{font-size:clamp(1.35rem,3vw,2rem);font-weight:900;letter-spacing:-.03em;color:#f8fafc;margin:.85rem 0 .4rem;}
+.vault-muted{color:#94a3b8;font-size:.9rem;line-height:1.6;}
+.vault-form{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1.2rem;}
+.vault-input{min-width:0;flex:1 1 190px;background:#020617;color:#f8fafc;border:1px solid #334155;border-radius:.8rem;padding:.8rem .95rem;outline:none;}
+.vault-input:focus{border-color:#22d3ee;box-shadow:0 0 0 3px rgba(34,211,238,.12);}
+.vault-btn{border:1px solid rgba(34,211,238,.35);border-radius:.8rem;padding:.8rem 1rem;font-weight:800;color:#ecfeff;background:linear-gradient(110deg,#0891b2,#4f46e5);cursor:pointer;transition:transform .15s,filter .15s;}
+.vault-btn:hover{filter:brightness(1.12);transform:translateY(-1px);}
+.vault-btn:disabled{opacity:.55;cursor:wait;transform:none;}
+.vault-btn.secondary{background:#0f172a;border-color:#334155;color:#cbd5e1;}
+.vault-status{min-height:1.3rem;margin-top:.7rem;color:#fda4af;font-size:.83rem;overflow-wrap:anywhere;}
+.vault-upload{margin-top:1.2rem;padding:1rem;border:1px dashed rgba(34,211,238,.4);border-radius:1rem;background:rgba(8,47,73,.25);}
+.vault-upload label{display:block;font-weight:800;color:#a5f3fc;margin-bottom:.55rem;}
+.vault-upload input{display:block;width:100%;max-width:100%;color:#cbd5e1;font-size:.85rem;}
+.vault-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:.8rem;margin-top:1rem;}
+.vault-file-card{min-width:0;border:1px solid #334155;border-radius:1rem;background:rgba(2,6,23,.62);padding:1rem;}
+.vault-file-name{font-weight:800;color:#e2e8f0;overflow-wrap:anywhere;}
+.vault-file-meta{font-size:.75rem;color:#94a3b8;margin:.35rem 0 .8rem;}
+.vault-file-actions{display:flex;gap:.5rem;flex-wrap:wrap;}
+.vault-file-actions a,.vault-file-actions button{font-size:.78rem;font-weight:800;text-decoration:none;border-radius:.65rem;padding:.55rem .7rem;border:1px solid #334155;background:#0f172a;color:#a5f3fc;cursor:pointer;}
+.vault-empty{grid-column:1/-1;text-align:center;border:1px dashed #334155;border-radius:1rem;padding:1.4rem;color:#94a3b8;}
+.vault-warning{font-size:.76rem;color:#94a3b8;margin-top:1rem;line-height:1.55;}
+@media(max-width:480px){.vault-wrap{width:calc(100% - 1.25rem);margin:1.2rem auto}.vault-form>*{width:100%;}.vault-btn{justify-content:center}.vault-inner{padding:1rem}}
     </style>
 
     <!-- Prevent theme flash -->
@@ -1516,6 +2118,47 @@
 
 
 <!-- =====================================================
+     PRIVATE FILE VAULT
+===================================================== -->
+<section class="vault-wrap" id="privateVault" aria-labelledby="vaultHeading">
+  <div class="vault-panel">
+    <div class="vault-inner">
+      <div class="vault-kicker"><i class="fa-solid fa-shield-halved"></i> PRIVATE CLOUD STORAGE</div>
+      <h2 class="vault-title" id="vaultHeading">Private File Vault</h2>
+      <p class="vault-muted">Private files aur links dekhne ke liye pehle website mein login karein, phir vault access code enter karein.</p>
+      <p class="vault-muted" id="vaultLoginNotice">Login required — bina login Private Vault nahi khulega.</p>
+      <div id="vaultGate">
+        <form class="vault-form" id="vaultUnlockForm">
+          <input class="vault-input" id="vaultPassword" type="password" inputmode="numeric" autocomplete="off" maxlength="4" placeholder="Enter 4-digit access code" aria-label="Vault access code" required>
+          <button class="vault-btn" type="submit"><i class="fa-solid fa-unlock-keyhole"></i> Unlock Vault</button>
+        </form>
+        <p class="vault-status" id="vaultStatus" role="status" aria-live="polite"></p>
+      </div>
+      <div id="vaultContent" hidden>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
+          <div><h3 class="text-lg font-bold text-slate-100">Cloud documents</h3><p class="vault-muted">Files online sync hote hain jab Firebase rules/config sahi ho.</p></div>
+          <button class="vault-btn secondary" id="vaultLockBtn" type="button"><i class="fa-solid fa-lock"></i> Lock Vault</button>
+        </div>
+        <div id="vaultAdminUpload" class="vault-upload" hidden>
+          <label for="vaultUpload"><i class="fa-solid fa-cloud-arrow-up"></i> Admin Upload — Owner account only</label>
+          <input id="vaultUpload" type="file" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,.jpg,.jpeg,.png,.webp,.zip,.c,.cpp,.py,.html,.css,.js">
+          <p class="vault-muted mt-2">Har file maximum 600 KB. Bade PDF/video ke liye Firebase Storage setup zaroori hai.</p>
+          <div class="mt-4 pt-4 border-t border-slate-700">
+            <label for="vaultLinkName"><i class="fa-solid fa-link"></i> Private section mein website / notes link add karein</label>
+            <input class="vault-input mt-2" id="vaultLinkName" type="text" maxlength="120" placeholder="Link ka naam (jaise Physics Notes)" autocomplete="off">
+            <input class="vault-input mt-2" id="vaultLinkUrl" type="url" placeholder="https://example.com/notes.pdf" autocomplete="url">
+            <button class="vault-btn mt-2" id="vaultAddLinkBtn" type="button"><i class="fa-solid fa-plus"></i> Add Private Link</button>
+          </div>
+          <p class="vault-status" id="vaultUploadStatus" role="status" aria-live="polite"></p>
+        </div>
+        <div id="vaultFileList" class="vault-list" aria-live="polite"><div class="vault-empty">Connecting to cloud vault…</div></div>
+        <p class="vault-warning"><i class="fa-solid fa-circle-info"></i> Important: code-based screen lock akela secure storage nahi hota. Actual privacy ke liye Firebase Security Rules bhi configure karein; instructions HTML ke end mein comments mein hain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
      FIREBASE
 ===================================================== -->
 
@@ -2190,6 +2833,10 @@ window.handleResetPassword = async function(e) {
 ========================================= */
 
 window.logoutSession = function() {
+
+    if (typeof window.lockPrivateVault === "function") {
+        window.lockPrivateVault("Logged out — Private Vault locked.");
+    }
 
     localStorage.removeItem(
         "btech_logged_in"
@@ -3493,6 +4140,266 @@ window.toggleBlockUser =
         }
 
     };
+
+
+
+/* =====================================================
+   PRIVATE FILE VAULT — persistent Firestore version
+   Owner upload UI is shown only for the configured owner email.
+   Note: client checks are UI-only; enforce permissions in Firebase Rules.
+===================================================== */
+const VAULT_ACCESS_CODE = "5436";
+const VAULT_OWNER_EMAIL = "ramdayalguru99@gmail.com";
+const VAULT_MAX_BYTES = 600 * 1024;
+let vaultUnlocked = false;
+let vaultUnsubscribe = null;
+let vaultDocsCache = [];
+
+const vaultEl = id => document.getElementById(id);
+const vaultCurrentEmail = () => (localStorage.getItem("btech_user_email") || "").trim().toLowerCase();
+const vaultIsLoggedIn = () => localStorage.getItem("btech_logged_in") === "true" && !!vaultCurrentEmail();
+const vaultIsOwner = () => vaultIsLoggedIn() && vaultCurrentEmail() === VAULT_OWNER_EMAIL;
+const vaultFormatSize = bytes => bytes < 1024 ? `${bytes} B` : bytes < 1024*1024 ? `${(bytes/1024).toFixed(1)} KB` : `${(bytes/(1024*1024)).toFixed(1)} MB`;
+
+function vaultSetStatus(message, kind="error") {
+  const el = vaultEl("vaultStatus");
+  if (!el) return;
+  el.textContent = message || "";
+  el.style.color = kind === "success" ? "#6ee7b7" : kind === "info" ? "#67e8f9" : "#fda4af";
+}
+
+function vaultRenderFiles() {
+  const list = vaultEl("vaultFileList");
+  if (!list) return;
+  list.replaceChildren();
+  if (!vaultDocsCache.length) {
+    const empty = document.createElement("div");
+    empty.className = "vault-empty";
+    empty.innerHTML = '<i class="fa-regular fa-folder-open text-2xl mb-2"></i><br>No files uploaded yet.';
+    list.appendChild(empty);
+    return;
+  }
+  if (!vaultIsLoggedIn() || !vaultUnlocked) {
+    list.replaceChildren();
+    return;
+  }
+  const owner = vaultIsOwner();
+  vaultDocsCache.forEach(file => {
+    const card = document.createElement("article");
+    card.className = "vault-file-card";
+    const name = document.createElement("div");
+    name.className = "vault-file-name";
+    name.textContent = file.name || "Unnamed file";
+    const meta = document.createElement("div");
+    meta.className = "vault-file-meta";
+    const date = file.createdAt ? new Date(file.createdAt).toLocaleString() : "Cloud item";
+    meta.textContent = file.itemType === "link" ? `Website link • ${date}` : `${vaultFormatSize(Number(file.size) || 0)} • ${date}`;
+    const actions = document.createElement("div");
+    actions.className = "vault-file-actions";
+    const link = document.createElement("a");
+    link.href = file.itemType === "link" ? (file.url || "#") : (file.dataUrl || "#");
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = file.itemType === "link" ? "Open Link" : "View / Open";
+    link.setAttribute("aria-label", `Open ${file.name || "item"}`);
+    actions.appendChild(link);
+    if (file.itemType !== "link") {
+      const download = document.createElement("a");
+      download.href = file.dataUrl || "#";
+      download.download = file.name || "download";
+      download.textContent = "Download";
+      actions.appendChild(download);
+    }
+    if (owner) {
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.textContent = "Delete";
+      remove.addEventListener("click", () => vaultDeleteFile(file.id, file.name));
+      actions.appendChild(remove);
+    }
+    card.append(name, meta, actions);
+    list.appendChild(card);
+  });
+}
+
+function vaultStartSync() {
+  if (typeof onSnapshot !== "function" || typeof collection !== "function") {
+    vaultEl("vaultFileList").innerHTML = '<div class="vault-empty">Firebase is not ready. Refresh the page and check your connection.</div>';
+    return;
+  }
+  if (vaultUnsubscribe) vaultUnsubscribe();
+  vaultEl("vaultFileList").innerHTML = '<div class="vault-empty">Syncing cloud files…</div>';
+  try {
+    vaultUnsubscribe = onSnapshot(collection(db, "privateFiles"), snapshot => {
+      vaultDocsCache = [];
+      snapshot.forEach(d => vaultDocsCache.push({ id: d.id, ...d.data() }));
+      vaultDocsCache.sort((a,b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
+      if (vaultUnlocked) vaultRenderFiles();
+    }, err => {
+      console.error("Vault sync error:", err);
+      vaultEl("vaultFileList").innerHTML = '<div class="vault-empty">Cloud access blocked. Firebase Firestore rules/configuration check karein.</div>';
+    });
+  } catch (err) {
+    console.error(err);
+    vaultEl("vaultFileList").innerHTML = '<div class="vault-empty">Could not connect to cloud vault.</div>';
+  }
+}
+
+function vaultForceLock(message = "") {
+  vaultUnlocked = false;
+  const content = vaultEl("vaultContent");
+  const gate = vaultEl("vaultGate");
+  if (content) content.hidden = true;
+  if (gate) gate.hidden = false;
+  if (vaultEl("vaultPassword")) vaultEl("vaultPassword").value = "";
+  if (vaultEl("vaultLoginNotice")) {
+    vaultEl("vaultLoginNotice").textContent = vaultIsLoggedIn()
+      ? "Login active — access code bhi enter karein."
+      : "Login required — bina login Private Vault nahi khulega.";
+  }
+  if (message) vaultSetStatus(message, "info");
+  if (vaultUnsubscribe) {
+    vaultUnsubscribe();
+    vaultUnsubscribe = null;
+  }
+  const list = vaultEl("vaultFileList");
+  if (list) list.replaceChildren();
+  vaultDocsCache = [];
+}
+
+window.lockPrivateVault = vaultForceLock;
+
+vaultEl("vaultUnlockForm")?.addEventListener("submit", event => {
+  event.preventDefault();
+  if (!vaultIsLoggedIn()) {
+    vaultForceLock();
+    vaultSetStatus("Private files kholne se pehle website mein login karein.");
+    return;
+  }
+  const entered = vaultEl("vaultPassword").value;
+  if (entered !== VAULT_ACCESS_CODE) {
+    vaultSetStatus("Wrong access code. Dobara try karein.");
+    return;
+  }
+  vaultUnlocked = true;
+  vaultEl("vaultGate").hidden = true;
+  vaultEl("vaultContent").hidden = false;
+  vaultEl("vaultAdminUpload").hidden = !vaultIsOwner();
+  vaultSetStatus("");
+  vaultEl("vaultUploadStatus").textContent = "";
+  vaultRenderFiles();
+  if (!vaultUnsubscribe) vaultStartSync();
+});
+
+vaultEl("vaultLockBtn")?.addEventListener("click", () => {
+  vaultForceLock("Vault locked.");
+});
+
+vaultEl("vaultAddLinkBtn")?.addEventListener("click", async () => {
+  const nameInput = vaultEl("vaultLinkName");
+  const urlInput = vaultEl("vaultLinkUrl");
+  const status = vaultEl("vaultUploadStatus");
+  const name = (nameInput.value || "").trim();
+  const rawUrl = (urlInput.value || "").trim();
+  if (!vaultUnlocked || !vaultIsOwner()) {
+    status.textContent = "Link add karne ke liye owner login aur unlocked vault zaroori hai.";
+    return;
+  }
+  if (!name || !rawUrl) {
+    status.textContent = "Link ka naam aur URL dono bharein.";
+    return;
+  }
+  let parsedUrl;
+  try { parsedUrl = new URL(rawUrl); } catch (_) {
+    status.textContent = "Sahi URL daalein, jaise https://example.com";
+    return;
+  }
+  if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+    status.textContent = "Sirf http ya https link add kar sakte hain.";
+    return;
+  }
+  const button = vaultEl("vaultAddLinkBtn");
+  button.disabled = true;
+  status.style.color = "#67e8f9";
+  status.textContent = "Saving private link…";
+  try {
+    await addDoc(collection(db, "privateFiles"), {
+      itemType: "link",
+      name,
+      url: parsedUrl.href,
+      size: 0,
+      createdAt: Date.now(),
+      uploadedBy: vaultCurrentEmail()
+    });
+    nameInput.value = "";
+    urlInput.value = "";
+    status.style.color = "#6ee7b7";
+    status.textContent = "Private link successfully add ho gaya.";
+  } catch (err) {
+    console.error("Vault link save error:", err);
+    status.style.color = "#fda4af";
+    status.textContent = `Link save nahi hua: ${err.message || "Firebase rules check karein."}`;
+  } finally {
+    button.disabled = false;
+  }
+});
+
+vaultEl("vaultUpload")?.addEventListener("change", async event => {
+  const input = event.currentTarget;
+  const files = Array.from(input.files || []);
+  const status = vaultEl("vaultUploadStatus");
+  input.value = "";
+  if (!files.length) return;
+  if (!vaultUnlocked || !vaultIsOwner()) {
+    status.textContent = "Upload permission denied. Owner login required.";
+    return;
+  }
+  for (const file of files) {
+    if (file.size > VAULT_MAX_BYTES) {
+      status.textContent = `${file.name}: 600 KB se badi file skip hui.`;
+      continue;
+    }
+    status.style.color = "#67e8f9";
+    status.textContent = `Uploading ${file.name}…`;
+    try {
+      const dataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error("File read nahi ho payi."));
+        reader.readAsDataURL(file);
+      });
+      await addDoc(collection(db, "privateFiles"), {
+        name: file.name,
+        size: file.size,
+        type: file.type || "application/octet-stream",
+        dataUrl,
+        createdAt: Date.now(),
+        uploadedBy: vaultCurrentEmail()
+      });
+      status.style.color = "#6ee7b7";
+      status.textContent = `${file.name} uploaded successfully.`;
+    } catch (err) {
+      console.error("Vault upload error:", err);
+      status.style.color = "#fda4af";
+      status.textContent = `Upload failed: ${err.message || "Firebase rules/configuration check karein."}`;
+      break;
+    }
+  }
+});
+
+async function vaultDeleteFile(id, name) {
+  if (!vaultIsOwner() || !vaultUnlocked) {
+    alert("Only the owner can delete vault files.");
+    return;
+  }
+  if (!confirm(`Delete ${name || "this file"}?`)) return;
+  try {
+    await deleteDoc(doc(db, "privateFiles", id));
+  } catch (err) {
+    console.error(err);
+    alert("Delete failed. Firebase Firestore rules check karein: " + err.message);
+  }
+}
 
 </script>
 
