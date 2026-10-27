@@ -1159,29 +1159,51 @@ footer .flex {
       }
     </style>
 
-    <!-- Resource cards: keep the repository compact and scroll within the list -->
+    <!-- Uploaded notes/resources: horizontal left-to-right scroll -->
     <style>
       #contentGrid {
-        max-height: 360px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        overscroll-behavior: contain;
+        display: flex !important;
+        flex-flow: row nowrap !important;
+        gap: 16px;
+        width: 100%;
+        min-width: 0;
+        max-height: none;
+        height: 360px;
+        padding: 4px 8px 16px 2px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
         scrollbar-color: #0891b2 #0f172a;
-        padding: 2px 6px 10px 2px;
-        align-content: start;
+        scroll-behavior: smooth;
+        align-items: stretch;
+        scroll-snap-type: x proximity;
       }
-      /* Tablet: two columns, allow roughly three cards before scrolling */
-      @media (min-width: 481px) and (max-width: 768px) {
-        #contentGrid { max-height: 590px; }
+      #contentGrid > .item-card {
+        flex: 0 0 280px;
+        width: 280px;
+        min-width: 280px;
+        max-width: 280px;
+        height: 100%;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scroll-snap-align: start;
+        box-sizing: border-box;
       }
-      /* Phones: show about three stacked cards, then scroll inside the repository */
+      #contentGrid::-webkit-scrollbar { height: 9px; }
+      #contentGrid::-webkit-scrollbar-track { background: #0f172a; border-radius: 10px; }
+      #contentGrid::-webkit-scrollbar-thumb { background: #0891b2; border-radius: 10px; }
+      #contentGrid::-webkit-scrollbar-thumb:hover { background: #22d3ee; }
+      #contentGrid:focus-visible { outline: 2px solid #22d3ee; outline-offset: 3px; }
+      @media (max-width: 768px) {
+        #contentGrid { height: 340px; gap: 12px; }
+        #contentGrid > .item-card { flex-basis: 260px; width: 260px; min-width: 260px; max-width: 260px; }
+      }
       @media (max-width: 480px) {
-        #contentGrid { max-height: 850px; }
-      }
-      #contentGrid:focus-visible {
-        outline: 2px solid #22d3ee;
-        outline-offset: 3px;
+        #contentGrid { height: 320px; padding-right: 6px; }
+        #contentGrid > .item-card { flex-basis: 245px; width: 245px; min-width: 245px; max-width: 245px; }
       }
     </style>
 
@@ -1507,8 +1529,14 @@ footer .flex {
 
     <!-- CONTENT -->
 
+    <div class="flex items-center justify-between gap-3 mb-3 mt-2">
+        <p class="text-xs font-mono uppercase tracking-wider text-cyan-400">Uploaded Notes &amp; Resources</p>
+        <p class="text-[11px] text-slate-500">Swipe / scroll left ↔ right to view more →</p>
+    </div>
     <div
         id="contentGrid"
+        tabindex="0"
+        aria-label="Uploaded notes and resources. Scroll horizontally from left to right to view more items."
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
     </div>
