@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="light">
 
 <head>
     <meta charset="UTF-8">
@@ -172,36 +172,7 @@ h1 {
     line-height: 1.5;
 }
 
-/* Terminal: prevent long commands from breaking layout */
-.dev-terminal {
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-    overflow: hidden;
-    overflow-wrap: anywhere;
-}
-
-.dev-terminal .terminal-bar {
-    min-width: 0;
-    gap: 8px;
-}
-
-.dev-terminal .terminal-bar > span {
-    min-width: 0;
-    overflow-wrap: anywhere;
-}
-
-.dev-terminal .p-5 {
-    min-width: 0;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
-
-#terminalTyping {
-    overflow-wrap: anywhere;
-}
-
-/* Search bar */
+    /* Search bar */
 #searchInput {
     width: 100%;
     min-width: 0;
@@ -1084,7 +1055,7 @@ footer .flex {
     <!-- Prevent theme flash -->
     <script>
         (function () {
-            const theme = localStorage.getItem("btech_theme") || "dark";
+            const theme = localStorage.getItem("btech_theme") || "light";
 
             if (theme === "light") {
                 document.documentElement.classList.remove("dark");
@@ -1095,6 +1066,98 @@ footer .flex {
             }
         })();
     </script>
+
+
+
+    <!-- SIMPLE PORTAL REDESIGN: visual-only changes; existing features and scripts retained -->
+    <style>
+      :root { color-scheme: light; }
+      html, body { background:#f5f7fb !important; color:#243047 !important; font-family:Arial, Helvetica, sans-serif !important; }
+      body { background-image:none !important; }
+      .cyber-grid, body::before, body::after { background-image:none !important; }
+      header, footer { background:#ffffff !important; border-color:#e2e8f0 !important; box-shadow:none !important; }
+      header { position:relative !important; top:auto !important; backdrop-filter:none !important; }
+      header *, footer * { text-shadow:none !important; }
+      h1,h2,h3,h4 { color:#172033 !important; letter-spacing:normal !important; font-family:Arial,Helvetica,sans-serif !important; }
+      p, label, span, li { text-shadow:none !important; }
+      .bg-slate-950,.bg-slate-900,.bg-slate-800 { background:#ffffff !important; }
+      .bg-slate-900\/80,.bg-slate-900\/70,.bg-slate-900\/60,.bg-slate-950\/80,.bg-slate-950\/70,.bg-slate-950\/60 { background:#ffffff !important; }
+      .text-slate-100,.text-slate-200,.text-slate-300 { color:#263248 !important; }
+      .text-slate-400,.text-slate-500 { color:#64748b !important; }
+      .border-slate-800,.border-slate-700,.border-slate-600 { border-color:#e2e8f0 !important; }
+      [class*="shadow-neon"], [class*="glow"], .glow-text { box-shadow:none !important; text-shadow:none !important; }
+      .rounded-2xl,.rounded-3xl { border-radius:14px !important; }
+      .rounded-xl { border-radius:10px !important; }
+      .dev-badge,.dev-command { background:#f1f5f9 !important; border:1px solid #e2e8f0 !important; color:#475569 !important; box-shadow:none !important; }
+      button { box-shadow:none !important; text-shadow:none !important; transition:background .15s ease !important; }
+      .bg-gradient-to-r,.bg-gradient-to-br,.bg-gradient-to-b { background-image:none !important; }
+      .from-blue-600,.from-cyan-500,.from-blue-500 { background-color:#2563eb !important; }
+      .text-cyan-300,.text-cyan-400,.text-blue-400 { color:#2563eb !important; }
+      .border-cyan-500\/40,.border-cyan-500\/30,.border-blue-500\/40 { border-color:#dbeafe !important; }
+      .bg-cyan-500\/20,.bg-blue-500\/10,.bg-cyan-500\/10 { background:#eff6ff !important; }
+      input,textarea,select { background:#fff !important; color:#1e293b !important; border:1px solid #cbd5e1 !important; border-radius:8px !important; }
+      input:focus,textarea:focus,select:focus { outline:2px solid #bfdbfe !important; border-color:#60a5fa !important; }
+      .vault-file-card,.vault-inner,.vault-upload { background:#fff !important; border-color:#e2e8f0 !important; box-shadow:none !important; }
+      .vault-file-name,.vault-upload label { color:#172033 !important; }
+      .vault-file-actions a,.vault-file-actions button { background:#f8fafc !important; color:#1d4ed8 !important; border-color:#cbd5e1 !important; }
+      #adminPanelSection > div, main section, .resource-card, .tool-card { box-shadow:0 2px 8px rgba(15,23,42,.04) !important; }
+      .status-pulse { animation:none !important; }
+      .animate-pulse,.animate-bounce { animation:none !important; }
+      a { color:#2563eb; }
+      @media(max-width:640px) {
+        header > div { padding-top:12px !important; padding-bottom:12px !important; }
+        h1 { font-size:2.35rem !important; line-height:1.15 !important; }
+        section { padding-top:28px !important; padding-bottom:28px !important; }
+        #adminPanelSection { padding-left:12px !important; padding-right:12px !important; }
+      }
+      /* Dark theme remains available from the existing theme button */
+      html.dark, html.dark body { color-scheme:dark; background:#111827 !important; color:#e5e7eb !important; }
+      html.dark header, html.dark footer, html.dark .bg-slate-950, html.dark .bg-slate-900, html.dark .bg-slate-800,
+      html.dark .bg-slate-900\/80, html.dark .bg-slate-900\/70, html.dark .bg-slate-900\/60,
+      html.dark .bg-slate-950\/80, html.dark .bg-slate-950\/70, html.dark .bg-slate-950\/60,
+      html.dark .vault-file-card, html.dark .vault-inner, html.dark .vault-upload { background:#1f2937 !important; }
+      html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark .text-slate-100, html.dark .text-slate-200, html.dark .text-slate-300 { color:#f3f4f6 !important; }
+      html.dark p, html.dark label, html.dark span, html.dark li { color:inherit; }
+      html.dark .text-slate-400, html.dark .text-slate-500 { color:#9ca3af !important; }
+      html.dark input, html.dark textarea, html.dark select { background:#111827 !important; color:#f3f4f6 !important; border-color:#4b5563 !important; }
+      html.dark .dev-badge, html.dark .dev-command { background:#111827 !important; border-color:#374151 !important; color:#d1d5db !important; }
+      html.dark .vault-file-name, html.dark .vault-upload label { color:#f3f4f6 !important; }
+      html.dark .vault-file-actions a, html.dark .vault-file-actions button { background:#111827 !important; color:#93c5fd !important; border-color:#4b5563 !important; }
+    </style>
+    <style>
+      /* Compact search: remove the extra box around the text field */
+      #searchInput {
+        background: transparent !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        outline: none !important;
+        min-height: 34px !important;
+        height: 34px !important;
+        padding: 6px 8px !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        appearance: none !important;
+        -webkit-appearance: none !important;
+      }
+      #searchInput:focus {
+        border: 0 !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
+      #searchInput::-webkit-search-cancel-button { cursor: pointer; }
+      #searchInput::placeholder { font-size: 12px !important; }
+      #searchInput + button, #searchInput + button + button {
+        flex-shrink: 0;
+        white-space: nowrap;
+      }
+      @media (max-width: 520px) {
+        #searchInput { font-size: 12px !important; padding-left: 5px !important; }
+        #searchInput::placeholder { font-size: 10px !important; }
+        #searchInput + button { padding-left: 10px !important; padding-right: 10px !important; }
+        #searchInput + button + button { padding-left: 8px !important; padding-right: 8px !important; }
+      }
+    </style>
 
 </head>
 
@@ -1136,7 +1199,7 @@ footer .flex {
                 <span
                     class="block text-[10px] text-cyan-400/80 font-mono tracking-widest uppercase font-bold">
 
-                    NEURAL CLOUD // DEV NODE
+                    B.Tech AIML Portal
 
                 </span>
 
@@ -1156,7 +1219,7 @@ footer .flex {
 
             <span id="authStatusText">
 
-                SYS_MODE:
+                Account:
                 <strong class="text-cyan-400">
                     STUDENT_LOCKED
                 </strong>
@@ -1200,7 +1263,7 @@ footer .flex {
                 </i>
 
                 <span id="adminBtnText">
-                    AUTH ACCESS
+                    Admin Login
                 </span>
 
             </button>
@@ -1211,7 +1274,22 @@ footer .flex {
 
 </header>
 
+<!-- FULL-WIDTH SEARCH -->
+<section id="searchAndNewUploads" class="px-4 sm:px-6 lg:px-8 pt-4 pb-2">
+  <div class="max-w-7xl mx-auto">
+    <!-- Search area -->
+    <div class="min-w-0">
+      <div class="dev-section-title mb-3">Search Notes &amp; Resources</div>
+      <div class="bg-slate-900/90 border border-slate-700 p-2 rounded-xl flex items-center max-w-full min-w-0">
+        <div class="pl-2 text-cyan-400 text-sm shrink-0"><i class="fa-solid fa-magnifying-glass"></i></div>
+        <input type="search" id="searchInput" aria-label="Search notes and resources" placeholder="Search notes, subject or chapter..." class="min-w-0 flex-1 bg-transparent px-2 py-2 text-slate-100 placeholder-slate-500 focus:outline-none text-sm" autocomplete="off">
+        <button type="button" id="searchButton" onclick="runResourceSearch()" class="shrink-0 text-white px-3 text-xs bg-cyan-700 hover:bg-cyan-600 py-2 rounded-lg font-semibold">Search</button>
+        <button type="button" onclick="clearSearch()" class="shrink-0 text-slate-300 hover:text-white px-2 text-xs bg-slate-800 py-2 rounded-lg ml-1">Clear</button>
+      </div>
+    </div>
 
+  </div>
+</section>
 
 <!-- =====================================================
      HERO
@@ -1224,69 +1302,43 @@ footer .flex {
 
     <div class="max-w-7xl mx-auto relative z-10">
 
-        <div class="grid lg:grid-cols-[1.15fr_.85fr] gap-8 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-6 lg:gap-8 items-center">
 
             <div>
                 <div class="dev-badge mb-5">
                     <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 status-pulse"></span>
-                    AI / ML ENGINEERING WORKSPACE
+                    B.Tech AIML Student Portal
                 </div>
 
                 <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight mb-5 leading-[1.02]">
-                    Build.
+                    Learn.
                     <span class="bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 bg-clip-text text-transparent glow-text">
-                        Learn.
+                        Study.
                     </span>
                     <br>
-                    <span class="text-slate-100">Deploy.</span>
+                    <span class="text-slate-100">Grow.</span>
                 </h1>
 
                 <p class="text-slate-400 text-sm sm:text-base max-w-2xl mb-7 leading-relaxed">
-                    A developer-first B.Tech AIML command center for notes, engineering tools,
-                    PYQs, assignments and cloud-synced resources.
+                    A simple place for B.Tech AIML notes, tools,
+                    previous papers, assignments and study resources.
                 </p>
 
-                <div class="flex flex-wrap gap-2 mb-7">
-                    <div class="dev-command"><b>~/aiml</b> <span>$</span> open neural-hub</div>
-                    <div class="dev-command"><i class="fa-solid fa-bolt text-amber-400"></i> REALTIME</div>
-                    <div class="dev-command"><i class="fa-solid fa-shield-halved text-emerald-400"></i> SECURE NODE</div>
-                </div>
-
-                <div class="flex flex-wrap gap-3 text-xs font-mono">
-                    <button onclick="openModal('passwordModal')"
-                        class="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white px-5 py-3 rounded-xl font-bold shadow-neon border border-cyan-400/30 transition">
-                        <i class="fa-solid fa-terminal mr-2"></i>ENTER WORKSPACE
-                    </button>
-
-                    <button onclick="document.getElementById('contentGrid').scrollIntoView({behavior:'smooth'})"
-                        class="bg-slate-900/70 hover:bg-slate-800 border border-slate-700 hover:border-cyan-400/40 text-slate-200 px-5 py-3 rounded-xl transition">
-                        <i class="fa-solid fa-code-branch mr-2 text-cyan-400"></i>EXPLORE REPOSITORY
-                    </button>
-                </div>
+                <!-- Removed the extra portal badges and hero buttons as requested. -->
             </div>
 
-            <div class="dev-terminal rounded-2xl p-0 overflow-hidden dev-float">
-                <div class="scanline"></div>
-
-                <div class="terminal-bar px-4 py-3 flex items-center justify-between">
-                    <div class="flex items-center gap-1.5">
-                        <span class="terminal-dot bg-red-400"></span>
-                        <span class="terminal-dot bg-yellow-400"></span>
-                        <span class="terminal-dot bg-emerald-400"></span>
-                    </div>
-                    <span class="text-[10px] text-slate-500 font-mono">guru@aiml-core:~</span>
-                    <span class="text-[10px] text-emerald-400 font-mono">ONLINE</span>
-                </div>
-
-                <div class="p-5 font-mono text-xs sm:text-sm space-y-3">
-                    <div><span class="text-emerald-400">guru@aiml</span><span class="text-slate-500">:</span><span class="text-blue-400">~/core</span><span class="text-slate-300">$</span> <span class="text-slate-100">systemctl status neural-cloud</span></div>
-                    <div class="pl-4 text-emerald-400">● neural-cloud.service - ACTIVE (RUNNING)</div>
-                    <div class="pl-4 text-slate-500">Loaded: cloud-registry.service</div>
-                    <div class="pl-4 text-slate-500">Sync: <span class="text-cyan-400">REALTIME FIRESTORE</span></div>
-                    <div class="pl-4 text-slate-500">Architecture: <span class="text-purple-400">AIML / WEB / CLOUD</span></div>
-                    <div class="mt-4"><span class="text-emerald-400">guru@aiml</span><span class="text-slate-500">:</span><span class="text-blue-400">~/core</span><span class="text-slate-300">$</span> <span id="terminalTyping">initializing developer workspace...</span><span class="dev-cursor"></span></div>
-                </div>
-            </div>
+                <aside id="newUploadsSection" class="w-full min-w-0 max-w-full lg:max-w-[320px] min-h-[190px] rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-4 shadow-lg shadow-emerald-950/10">
+      <div class="flex items-center justify-between gap-2 mb-3">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-500"><i class="fa-solid fa-bell"></i></span>
+          <h2 class="text-base font-bold text-slate-800 dark:text-slate-100">New Uploads</h2>
+        </div>
+        <span id="newUploadsCount" class="shrink-0 rounded-full bg-emerald-500/15 px-2 py-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">LIVE</span>
+      </div>
+      <div id="newUploadsList" class="space-y-2 max-h-40 overflow-y-auto overscroll-contain pr-1">
+        <p class="text-xs text-slate-500 dark:text-slate-400">New uploads will appear here.</p>
+      </div>
+    </aside>
 
         </div>
 
@@ -1319,25 +1371,7 @@ footer .flex {
 
         </div>
 
-        <div class="mt-8">
-            <div class="dev-section-title mb-3">Repository Search</div>
 
-            <div class="bg-slate-900/90 border border-cyan-500/30 p-2.5 rounded-2xl shadow-neon-cyan flex items-center max-w-4xl">
-
-                <div class="pl-3 text-cyan-400 font-mono text-sm">
-                    <i class="fa-solid fa-terminal"></i>
-                </div>
-
-                <input type="text" id="searchInput"
-                    placeholder="grep modules by title, branch, type or keyword..."
-                    class="w-full bg-transparent px-3 py-2 text-slate-100 placeholder-slate-500 focus:outline-none text-sm font-mono">
-
-                <button onclick="clearSearch()"
-                    class="text-slate-400 hover:text-white px-3 text-xs font-mono bg-slate-800 py-2 rounded-xl">
-                    CLEAR
-                </button>
-            </div>
-        </div>
 
     </div>
 </section>
@@ -1458,6 +1492,77 @@ footer .flex {
 
 
 <!-- =====================================================
+     ABOUT THE PORTAL
+===================================================== -->
+<section id="aboutPortal" class="hidden fixed inset-0 z-[9999] overflow-y-auto bg-slate-950/95 backdrop-blur-md px-3 sm:px-6 py-6 sm:py-10" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+  <div class="max-w-5xl mx-auto rounded-3xl border border-cyan-500/30 bg-slate-950 shadow-2xl shadow-cyan-950/30 p-4 sm:p-8">
+    <div class="flex items-start justify-between gap-4 mb-8">
+      <div class="max-w-3xl">
+        <div class="dev-badge mb-4"><i class="fa-solid fa-circle-info text-cyan-400 mr-2"></i> ABOUT THIS PLATFORM</div>
+        <h2 id="aboutTitle" class="text-3xl sm:text-4xl font-black tracking-tight text-slate-100 mb-4">
+          Learn. Study. <span class="bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 bg-clip-text text-transparent">Grow.</span>
+        </h2>
+        <p class="text-sm sm:text-base leading-7 text-slate-400">
+          B.Tech AIML Student Portal is a student-focused learning hub designed to bring study resources and useful learning tools together in one place. It helps students discover available materials, explore categories, and keep their study resources organized.
+        </p>
+      </div>
+      <button type="button" id="closeAboutBtn" class="shrink-0 w-11 h-11 rounded-xl border border-slate-700 bg-slate-900 text-slate-200 hover:bg-slate-800" aria-label="Close About"><i class="fa-solid fa-xmark text-lg"></i></button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+      <article class="rounded-2xl border border-cyan-500/20 bg-slate-900/70 p-5">
+        <div class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-300 flex items-center justify-center mb-4"><i class="fa-solid fa-book-open text-lg"></i></div>
+        <h3 class="font-bold text-slate-100 text-lg mb-2">Study Material</h3>
+        <p class="text-sm leading-6 text-slate-400">Browse notes, syllabus, previous-year question papers (PYQs), assignments, and other resources by category. Only material that has been added to the portal will appear here.</p>
+      </article>
+      <article class="rounded-2xl border border-blue-500/20 bg-slate-900/70 p-5">
+        <div class="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-300 flex items-center justify-center mb-4"><i class="fa-solid fa-magnifying-glass text-lg"></i></div>
+        <h3 class="font-bold text-slate-100 text-lg mb-2">Search &amp; New Uploads</h3>
+        <p class="text-sm leading-6 text-slate-400">Enter a subject, chapter, or resource name in the search box. Check the New Uploads panel near the hero section to see recently added resources.</p>
+      </article>
+      <article class="rounded-2xl border border-violet-500/20 bg-slate-900/70 p-5">
+        <div class="w-11 h-11 rounded-xl bg-violet-500/10 text-violet-300 flex items-center justify-center mb-4"><i class="fa-solid fa-screwdriver-wrench text-lg"></i></div>
+        <h3 class="font-bold text-slate-100 text-lg mb-2">Useful Tools &amp; Updates</h3>
+        <p class="text-sm leading-6 text-slate-400">Use the tools and links that are available on the portal. If a resource request option is available, send a request to the administrator for material you need.</p>
+      </article>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-5">
+      <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 sm:p-6">
+        <h3 class="text-xl font-bold text-slate-100 mb-5"><i class="fa-solid fa-list-check text-emerald-400 mr-2"></i> How to Use This Website</h3>
+        <ol class="space-y-4 text-sm leading-6 text-slate-400">
+          <li class="flex gap-3"><span class="flex shrink-0 w-7 h-7 items-center justify-center rounded-lg bg-cyan-500/15 text-cyan-300 font-bold">1</span><span><b class="text-slate-200">Explore the homepage:</b> Review the categories and resources available on the portal.</span></li>
+          <li class="flex gap-3"><span class="flex shrink-0 w-7 h-7 items-center justify-center rounded-lg bg-cyan-500/15 text-cyan-300 font-bold">2</span><span><b class="text-slate-200">Search or browse:</b> Use the search box or choose Notes, Tools, PYQ, Syllabus, or Assignments.</span></li>
+          <li class="flex gap-3"><span class="flex shrink-0 w-7 h-7 items-center justify-center rounded-lg bg-cyan-500/15 text-cyan-300 font-bold">3</span><span><b class="text-slate-200">Open a resource:</b> Click its available file or link. Sign in if the portal asks you to log in.</span></li>
+          <li class="flex gap-3"><span class="flex shrink-0 w-7 h-7 items-center justify-center rounded-lg bg-cyan-500/15 text-cyan-300 font-bold">4</span><span><b class="text-slate-200">Check new uploads:</b> Visit the New Uploads panel for recently added material. New items appear when they are uploaded.</span></li>
+        </ol>
+        <p class="text-xs text-slate-500 mt-5 border-t border-slate-700 pt-4">Note: Available content and features may depend on your login status, uploaded resources, and the website/Firebase configuration.</p>
+      </div>
+
+      <div class="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-950/50 via-slate-900 to-blue-950/50 p-5 sm:p-6 flex flex-col justify-between">
+        <div>
+          <div class="text-xs font-bold tracking-[0.2em] text-cyan-300 mb-4">THE CREATOR</div>
+          <div class="flex items-center gap-4 mb-5">
+            <div class="w-16 h-16 shrink-0 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-400 flex items-center justify-center text-white text-xl font-black shadow-lg">GR</div>
+            <div>
+              <h3 class="text-xl sm:text-2xl font-black text-slate-100">Guru Ramdayal</h3>
+              <p class="text-sm text-cyan-300 mt-1">B.Tech 1st Year Student</p>
+              <p class="text-sm text-slate-400">Artificial Intelligence &amp; Machine Learning (AI-ML)</p>
+            </div>
+          </div>
+          <p class="text-sm leading-7 text-slate-300">“I created this student portal as a learning project to make study resources easier to find in one place. As a first-year B.Tech AI-ML student, I am continuing to learn, build, and improve the platform so it can be more useful for fellow students.”</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-cyan-500/20 flex flex-wrap gap-2">
+          <span class="text-xs rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-200 px-3 py-1.5"><i class="fa-solid fa-graduation-cap mr-1"></i> Student Project</span>
+          <span class="text-xs rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-200 px-3 py-1.5"><i class="fa-solid fa-code mr-1"></i> Learning by Building</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- =====================================================
      FOOTER
 ===================================================== -->
 
@@ -1469,7 +1574,7 @@ footer .flex {
 
         <div class="text-slate-500">
 
-            © 2026 B.Tech AIML Cloud Platform.
+            © 2026 B.Tech AIML Student Portal.
 
         </div>
 
@@ -1510,12 +1615,17 @@ footer .flex {
 
 <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-5">
     <div class="dev-command justify-center sm:justify-between flex-wrap">
-        <span><b>GURU@AIML</b> // developer hub</span>
+        <span><b>B.Tech AIML</b> Student Portal</span>
         <span class="text-slate-500">Built with HTML • Tailwind • Firebase • JavaScript</span>
-        <span class="text-emerald-400"><i class="fa-solid fa-circle text-[6px] mr-1"></i> all systems operational</span>
+        <span class="text-emerald-400"><i class="fa-solid fa-circle text-[6px] mr-1"></i> Portal ready</span>
     </div>
 </div>
 
+<div class="w-full flex justify-center px-4 pb-8 pt-2">
+  <button type="button" id="openAboutBtn" class="group inline-flex items-center gap-3 rounded-full border border-cyan-400/40 bg-slate-900 px-6 py-3 text-sm font-bold tracking-wide text-cyan-200 shadow-lg shadow-cyan-950/20 transition hover:-translate-y-0.5 hover:border-cyan-300 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+    <i class="fa-solid fa-circle-info text-base"></i> ABOUT THIS WEBSITE <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-70 transition group-hover:translate-x-0.5"></i>
+  </button>
+</div>
 
 <!-- =====================================================
      ADMIN PANEL
@@ -1548,13 +1658,13 @@ footer .flex {
                     <h3
                         class="text-base font-bold text-slate-100 font-mono">
 
-                        FIRESTORE NEURAL REGISTRY
+                        Manage Study Material
 
                     </h3>
 
                     <p class="text-xs text-slate-400">
 
-                        Deploy resources, web tools or documentation instantly.
+                        Upload notes, tools, papers and other study material.
 
                     </p>
 
@@ -1566,7 +1676,7 @@ footer .flex {
                 onclick="logoutSession()"
                 class="bg-red-500/10 text-red-400 border border-red-500/30 text-xs font-mono px-3.5 py-1.5 rounded-xl">
 
-                TERMINATE SESSION
+                Logout
 
             </button>
 
@@ -1654,25 +1764,37 @@ footer .flex {
 
                 <div>
 
-                    <label
-                        id="fileOrLinkLable"
-                        class="block text-slate-400 uppercase mb-1">
-
-                        Select File
-
+                    <label for="uploadMethod" class="block text-slate-400 uppercase mb-1">
+                        Upload kaise karna hai?
                     </label>
 
-                    <input
-                        type="file"
-                        id="uploadFileInput"
-                        accept=".pdf,.doc,.docx,.zip,.txt,.png,.jpg"
-                        class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5">
+                    <select
+                        id="uploadMethod"
+                        class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-slate-200">
+                        <option value="">Pehle choose karein: File ya Link</option>
+                        <option value="file">File upload karni hai</option>
+                        <option value="link">Link dena hai</option>
+                    </select>
 
-                    <input
-                        type="url"
-                        id="uploadLink"
-                        placeholder="https:// link..."
-                        class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 mt-2 hidden">
+                    <div id="uploadFileWrap" class="mt-3 hidden">
+                        <label id="fileOrLinkLable" for="uploadFileInput" class="block text-slate-400 uppercase mb-1">
+                            Select File
+                        </label>
+                        <input
+                            type="file"
+                            id="uploadFileInput"
+                            accept=".pdf,.doc,.docx,.zip,.txt,.png,.jpg,.jpeg,.ppt,.pptx"
+                            class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5">
+                    </div>
+
+                    <div id="uploadLinkWrap" class="mt-3 hidden">
+                        <label for="uploadLink" class="block text-slate-400 uppercase mb-1">Resource Link</label>
+                        <input
+                            type="url"
+                            id="uploadLink"
+                            placeholder="https://example.com/question-paper.pdf"
+                            class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3">
+                    </div>
 
                 </div>
 
@@ -1745,18 +1867,21 @@ footer .flex {
     <!-- MESSAGES -->
 
     <div
-        class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-6">
+        class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-4 sm:p-5">
 
-        <h3
-            class="text-base font-bold text-slate-100 font-mono mb-4">
-
-            Student Inquiries & Admin Replies
-
-        </h3>
+        <div class="flex items-center justify-between gap-3 mb-3">
+            <div>
+                <h3 class="text-base font-bold text-slate-100 font-mono">
+                    Student Messages
+                </h3>
+                <p class="text-xs text-slate-400 mt-1">Compact chat view · Scroll to see older messages</p>
+            </div>
+            <span class="text-xs text-emerald-300 border border-emerald-500/30 bg-emerald-500/10 rounded-full px-3 py-1 shrink-0">INBOX</span>
+        </div>
 
         <div
             id="adminMessagesContainer"
-            class="space-y-4 max-h-[450px] overflow-y-auto">
+            class="space-y-2 max-h-[320px] overflow-y-auto overscroll-contain pr-1">
 
         </div>
 
@@ -1805,35 +1930,33 @@ footer .flex {
     <!-- REQUEST -->
 
     <div
-        class="bg-slate-900 border border-cyan-500/30 rounded-2xl p-6">
+        class="bg-slate-900 border border-cyan-500/30 rounded-2xl p-4 sm:p-5">
 
-        <h3
-            class="text-sm font-bold text-slate-100 font-mono mb-4">
-
-            Request Notes or Features from Admin
-
+        <h3 class="text-sm font-bold text-slate-100 font-mono mb-1">
+            Message the Admin
         </h3>
+        <p class="text-xs text-slate-400 mb-3">Ask for notes, report an issue, or suggest a feature.</p>
 
         <form
             onsubmit="handleSendStudentMessage(event)"
-            class="space-y-3">
+            class="space-y-2">
 
             <textarea
                 id="studentMsgText"
-                rows="3"
-                placeholder="Sir, please upload AIML mathematics notes..."
+                rows="2"
+                placeholder="Type your message..."
                 required
-                class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3">
+                class="w-full resize-y min-h-[64px] max-h-32 bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm focus:outline-none focus:border-cyan-500">
             </textarea>
 
-            <button
-                type="submit"
-                id="sendMsgBtn"
-                class="bg-cyan-600 text-white font-bold px-5 py-2.5 rounded-xl">
-
-                Send Message to Admin
-
-            </button>
+            <div class="flex justify-end">
+                <button
+                    type="submit"
+                    id="sendMsgBtn"
+                    class="bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-bold px-4 py-2 rounded-xl">
+                    Send Message ↗
+                </button>
+            </div>
 
         </form>
 
@@ -1843,18 +1966,19 @@ footer .flex {
     <!-- PERSONAL MESSAGES -->
 
     <div
-        class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5">
 
-        <h3
-            class="text-sm font-bold text-slate-100 font-mono mb-4">
-
-            My Sent Messages & Admin Replies
-
-        </h3>
+        <div class="flex items-center justify-between gap-3 mb-3">
+            <div>
+                <h3 class="text-sm font-bold text-slate-100 font-mono">My Messages</h3>
+                <p class="text-xs text-slate-400 mt-1">Your messages and admin replies</p>
+            </div>
+            <span class="text-xs text-cyan-300 border border-cyan-500/30 bg-cyan-500/10 rounded-full px-3 py-1 shrink-0">CHAT</span>
+        </div>
 
         <div
             id="studentPersonalMessagesContainer"
-            class="space-y-3 max-h-[350px] overflow-y-auto">
+            class="space-y-3 max-h-[280px] overflow-y-auto overscroll-contain pr-1">
 
         </div>
 
@@ -2215,6 +2339,57 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
+// Watch the currently logged-in user's Firestore status in real time.
+// This logs a blocked account out in every open tab/browser session that is online.
+let blockedAccountUnsubscribe = null;
+let blockedAccountWatchingEmail = "";
+let blockedAccountLogoutInProgress = false;
+
+function stopBlockedAccountWatcher() {
+    if (typeof blockedAccountUnsubscribe === "function") {
+        blockedAccountUnsubscribe();
+    }
+    blockedAccountUnsubscribe = null;
+    blockedAccountWatchingEmail = "";
+}
+
+function forceLogoutBlockedAccount(message = "Your account has been blocked by the administrator.") {
+    if (blockedAccountLogoutInProgress) return;
+    blockedAccountLogoutInProgress = true;
+    stopBlockedAccountWatcher();
+    localStorage.removeItem("btech_logged_in");
+    localStorage.removeItem("btech_user_email");
+    if (typeof window.lockPrivateVault === "function") {
+        window.lockPrivateVault("Account blocked — Private Vault locked.");
+    }
+    if (typeof window.checkLoginState === "function") window.checkLoginState();
+    if (typeof window.renderItems === "function") window.renderItems();
+    alert(message);
+    blockedAccountLogoutInProgress = false;
+}
+
+function startBlockedAccountWatcher(email) {
+    const normalizedEmail = String(email || "").trim().toLowerCase();
+    if (!normalizedEmail) return;
+    if (blockedAccountWatchingEmail === normalizedEmail && blockedAccountUnsubscribe) return;
+    stopBlockedAccountWatcher();
+    blockedAccountWatchingEmail = normalizedEmail;
+
+    const userQuery = query(collection(db, "users"), where("email", "==", normalizedEmail));
+    blockedAccountUnsubscribe = onSnapshot(userQuery, (snapshot) => {
+        // Ignore late events for a session that has already changed.
+        const currentEmail = String(localStorage.getItem("btech_user_email") || "").trim().toLowerCase();
+        if (localStorage.getItem("btech_logged_in") !== "true" || currentEmail !== normalizedEmail) return;
+        const isBlocked = snapshot.docs.some(userDoc => userDoc.data()?.isBlocked === true);
+        if (isBlocked) {
+            forceLogoutBlockedAccount("This account has been blocked. You have been logged out.");
+        }
+    }, (error) => {
+        console.error("Blocked-account watcher error:", error);
+        // Do not silently claim protection if Firestore rules prevent status reads.
+    });
+}
+
 
 
 /* =========================================
@@ -2340,7 +2515,6 @@ window.addEventListener(
         initUsersSync();
 
         initMessagesSync();
-        startTerminalTyping();
         updateDeveloperStats();
 
 
@@ -2390,13 +2564,9 @@ window.closeModal = function(id) {
 ========================================= */
 
 window.clearSearch = function() {
-
-    document.getElementById(
-        "searchInput"
-    ).value = "";
-
+    const input = document.getElementById("searchInput");
+    if (input) { input.value = ""; input.focus(); }
     renderItems();
-
 };
 
 
@@ -2422,6 +2592,11 @@ window.checkLoginState = function() {
         .trim()
         .toLowerCase();
 
+    if (isLoggedIn && loggedEmail) {
+        startBlockedAccountWatcher(loggedEmail);
+    } else {
+        stopBlockedAccountWatcher();
+    }
 
     const panel =
         document.getElementById(
@@ -2473,7 +2648,7 @@ window.checkLoginState = function() {
 
 
             statusText.innerHTML =
-                'SYS_MODE: <strong class="text-cyan-400">MASTER ADMIN</strong>';
+                'Account: <strong class="text-cyan-400">MASTER ADMIN</strong>';
 
         } else {
 
@@ -2488,7 +2663,7 @@ window.checkLoginState = function() {
 
 
             statusText.innerHTML =
-                `SYS_MODE: <strong class="text-blue-400">STUDENT (${loggedEmail})</strong>`;
+                `Account: <strong class="text-blue-400">STUDENT (${loggedEmail})</strong>`;
 
         }
 
@@ -2500,7 +2675,7 @@ window.checkLoginState = function() {
 
 
         btnText.innerText =
-            "AUTH ACCESS";
+            "Admin Login";
 
 
         btnIcon.className =
@@ -2508,7 +2683,7 @@ window.checkLoginState = function() {
 
 
         statusText.innerHTML =
-            'SYS_MODE: <strong class="text-slate-400">STUDENT_LOCKED</strong>';
+            'Account: <strong class="text-slate-400">STUDENT_LOCKED</strong>';
 
     }
 
@@ -2655,16 +2830,16 @@ window.handleLogin = async function(e) {
         } else {
 
             let userData = null;
+            let accountIsBlocked = false;
 
+            snapshot.forEach(d => {
+                const data = d.data();
+                // Treat any matching blocked record as blocked, including older duplicate records.
+                if (data.isBlocked === true) accountIsBlocked = true;
+                if (!userData) userData = data;
+            });
 
-            snapshot.forEach(
-                d => {
-                    userData = d.data();
-                }
-            );
-
-
-            if (userData.isBlocked) {
+            if (accountIsBlocked || userData?.isBlocked === true) {
 
                 alert(
                     "Access Denied: Account blocked."
@@ -2893,6 +3068,7 @@ function initRealtimeSync() {
 
             renderItems();
             updateDeveloperStats();
+            renderNewUploads();
 
         },
         err => {
@@ -2926,14 +3102,9 @@ function initUsersSync() {
 
 
                     cachedUsersList.push({
-
-                        email:
-                            u.email ||
-                            d.id,
-
-                        isBlocked:
-                            u.isBlocked === true
-
+                        docId: d.id,
+                        email: (u.email || d.id).toLowerCase(),
+                        isBlocked: u.isBlocked === true
                     });
 
                 }
@@ -3009,6 +3180,58 @@ function escapeHTML(value) {
         .replace(/'/g, "&#039;");
 }
 
+
+/* =========================================
+   NEW UPLOADS NOTICE
+   Shows the three most recently uploaded resources.
+   Updates automatically whenever Firestore modules change.
+========================================= */
+function renderNewUploads() {
+    const list = document.getElementById("newUploadsList");
+    const count = document.getElementById("newUploadsCount");
+    if (!list) return;
+
+    const items = [...(window.cloudItems || [])]
+        .filter(item => item && (item.title || item.link))
+        .sort((a, b) => {
+            const dateA = Date.parse(a.createdAt || 0) || 0;
+            const dateB = Date.parse(b.createdAt || 0) || 0;
+            return dateB - dateA;
+        })
+        .slice(0, 3);
+
+    if (count) count.textContent = items.length ? `${items.length} LATEST` : "0 ITEMS";
+    if (!items.length) {
+        list.innerHTML = '<p class="text-xs text-slate-500 dark:text-slate-400">Abhi koi resource upload nahi hua hai.</p>';
+        return;
+    }
+
+    const typeNames = {
+        notes: "Notes", tool: "Tool", pyq: "Question Paper / PYQ",
+        syllabus: "Syllabus", assignment: "Assignment"
+    };
+    const now = Date.now();
+    list.innerHTML = items.map(item => {
+        const title = escapeHTML(item.title || "Untitled resource");
+        const type = escapeHTML(typeNames[item.type] || item.type || "Resource");
+        const created = Date.parse(item.createdAt || "") || 0;
+        const isNew = created > 0 && (now - created) <= 7 * 24 * 60 * 60 * 1000;
+        const href = escapeHTML(item.link || "#");
+        const timeText = created ? new Date(created).toLocaleDateString("en-IN", { day: "numeric", month: "short" }) : "Recently added";
+        return `<div class="flex items-center gap-2 rounded-lg px-1.5 py-1 hover:bg-slate-500/5">
+            <span class="text-emerald-500 text-xs shrink-0"><i class="fa-solid fa-file-lines"></i></span>
+            <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-xs font-semibold text-slate-800 dark:text-slate-100 break-words">${title}</span>
+                    ${isNew ? '<span class="rounded bg-emerald-500/15 px-1.5 py-0.5 text-[9px] font-bold text-emerald-600 dark:text-emerald-400">NEW</span>' : ''}
+                </div>
+                <p class="text-[10px] text-slate-500 dark:text-slate-400">${type} · ${escapeHTML(timeText)}</p>
+            </div>
+            <a href="${href}" target="_blank" rel="noopener noreferrer" class="shrink-0 rounded-md border border-slate-300 dark:border-slate-700 px-1.5 py-1 text-[10px] font-semibold text-slate-600 dark:text-slate-300 hover:border-emerald-500 hover:text-emerald-500">View</a>
+        </div>`;
+    }).join("");
+}
+
 /* =========================================
    DEVELOPER STATS
 ========================================= */
@@ -3029,53 +3252,6 @@ function updateDeveloperStats() {
 
     const userCount = cachedUsersList.length;
     set("statUsers", userCount);
-}
-
-
-/* =========================================
-   TERMINAL TYPING EFFECT
-========================================= */
-
-function startTerminalTyping() {
-    const el = document.getElementById("terminalTyping");
-    if (!el) return;
-
-    const lines = [
-        "loading semester modules...",
-        "syncing cloud repository...",
-        "checking developer tools...",
-        "neural workspace ready."
-    ];
-
-    let line = 0;
-    let char = 0;
-    let deleting = false;
-
-    function tick() {
-        if (!el) return;
-
-        const current = lines[line];
-
-        if (!deleting) {
-            el.textContent = current.slice(0, char++);
-            if (char > current.length) {
-                deleting = true;
-                setTimeout(tick, 1100);
-                return;
-            }
-        } else {
-            el.textContent = current.slice(0, char--);
-            if (char < 0) {
-                deleting = false;
-                line = (line + 1) % lines.length;
-                char = 0;
-            }
-        }
-
-        setTimeout(tick, deleting ? 28 : 48);
-    }
-
-    tick();
 }
 
 
@@ -3133,7 +3309,7 @@ window.renderItems = function() {
 
                 <h3 class="text-base font-bold text-slate-200 mb-2">
 
-                    RESTRICTED NEURAL CONTENT
+                    Login to view study material
 
                 </h3>
 
@@ -3147,7 +3323,7 @@ window.renderItems = function() {
                     onclick="openModal('passwordModal')"
                     class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-xs font-bold px-6 py-3 rounded-xl">
 
-                    AUTH ACCESS NOW
+                    Admin Login NOW
 
                 </button>
 
@@ -3158,38 +3334,86 @@ window.renderItems = function() {
     }
 
 
-    let filtered =
-        items.filter(item => {
+    // Fuzzy search: title matches rank highest, then subject/branch and description.
+    // Allows partial words and small spelling mistakes, and sorts best matches first.
+    const normalizeSearch = value => String(value ?? "")
+        .toLowerCase()
+        .normalize("NFKD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
 
-            if (
-                currentCategory !== "all" &&
-                item.type !== currentCategory
-            ) {
-                return false;
+    const editDistance = (a, b) => {
+        if (!a) return b.length;
+        if (!b) return a.length;
+        let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+        for (let i = 1; i <= a.length; i++) {
+            const curr = [i];
+            for (let j = 1; j <= b.length; j++) {
+                curr[j] = Math.min(
+                    curr[j - 1] + 1,
+                    prev[j] + 1,
+                    prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
+                );
             }
+            prev = curr;
+        }
+        return prev[b.length];
+    };
 
+    const matchScore = (item, query) => {
+        const title = normalizeSearch(item.title);
+        const branch = normalizeSearch(item.branch);
+        const desc = normalizeSearch(item.desc || "");
+        const allText = `${title} ${branch} ${desc}`;
+        if (!query) return 0;
+        let score = 0;
+        if (title === query) score += 1500;
+        else if (title.startsWith(query)) score += 1100;
+        else if (title.includes(query)) score += 900;
+        if (branch === query) score += 800;
+        else if (branch.startsWith(query)) score += 600;
+        else if (branch.includes(query)) score += 450;
+        if (desc.includes(query)) score += 180;
+        if (allText.includes(query)) score += 100;
 
-            if (search) {
-
-                const text =
-                    (
-                        item.title +
-                        " " +
-                        item.branch +
-                        " " +
-                        (item.desc || "")
-                    )
-                    .toLowerCase();
-
-
-                return text.includes(search);
-
+        const queryWords = query.split(" ").filter(Boolean);
+        for (const word of queryWords) {
+            const fields = [title, branch, desc];
+            let bestWordScore = 0;
+            for (const field of fields) {
+                const words = field.split(" ").filter(Boolean);
+                for (const candidate of words) {
+                    if (candidate === word) bestWordScore = Math.max(bestWordScore, 220);
+                    else if (candidate.startsWith(word)) bestWordScore = Math.max(bestWordScore, 170);
+                    else if (candidate.includes(word) || word.includes(candidate)) bestWordScore = Math.max(bestWordScore, 100);
+                    else if (Math.min(candidate.length, word.length) >= 3) {
+                        const distance = editDistance(candidate.slice(0, Math.max(word.length, 1)), word);
+                        const allowed = word.length >= 7 ? 2 : 1;
+                        if (distance <= allowed) bestWordScore = Math.max(bestWordScore, 65 - distance * 10);
+                    }
+                }
             }
+            score += bestWordScore;
+        }
+        // Small bonus for ordered character matches, useful for incomplete typing.
+        let pos = 0;
+        for (const ch of query.replace(/ /g, "")) {
+            pos = allText.indexOf(ch, pos);
+            if (pos < 0) break;
+            score += 2;
+            pos++;
+        }
+        return score;
+    };
 
-
-            return true;
-
-        });
+    let filtered = items
+        .filter(item => currentCategory === "all" || item.type === currentCategory)
+        .map((item, index) => ({ item, index, score: search ? matchScore(item, normalizeSearch(search)) : 0 }))
+        .filter(entry => !search || entry.score >= Math.max(35, normalizeSearch(search).replace(/ /g, "").length * 8))
+        .sort((a, b) => (b.score - a.score) || (a.index - b.index))
+        .map(entry => entry.item);
 
 
     if (filtered.length === 0) {
@@ -3354,64 +3578,55 @@ window.renderItems = function() {
    SEARCH EVENT
 ========================================= */
 
-document
-    .getElementById("searchInput")
-    .addEventListener(
-        "input",
-        renderItems
-    );
+window.runResourceSearch = function() {
+    renderItems();
+    const repository = document.getElementById("contentGrid");
+    if (repository) {
+        repository.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+};
+
+const resourceSearchInput = document.getElementById("searchInput");
+if (resourceSearchInput) {
+    resourceSearchInput.addEventListener("input", renderItems);
+    resourceSearchInput.addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            window.runResourceSearch();
+        }
+    });
+}
 
 
 
 /* =========================================
-   UPLOAD TYPE
+   UPLOAD TYPE + FILE/LINK CHOICE
 ========================================= */
+const uploadTypeSelect = document.getElementById("uploadType");
+const uploadMethodSelect = document.getElementById("uploadMethod");
+const uploadFileWrap = document.getElementById("uploadFileWrap");
+const uploadLinkWrap = document.getElementById("uploadLinkWrap");
+const uploadFileInput = document.getElementById("uploadFileInput");
+const uploadLinkInput = document.getElementById("uploadLink");
 
-document
-    .getElementById("uploadType")
-    .addEventListener(
-        "change",
-        e => {
+function updateUploadMethod() {
+    const method = uploadMethodSelect.value;
+    uploadFileWrap.classList.toggle("hidden", method !== "file");
+    uploadLinkWrap.classList.toggle("hidden", method !== "link");
+    uploadFileInput.required = method === "file";
+    uploadLinkInput.required = method === "link";
+    if (method !== "file") uploadFileInput.value = "";
+    if (method !== "link") uploadLinkInput.value = "";
+}
 
-            const type =
-                e.target.value;
-
-
-            const file =
-                document.getElementById(
-                    "uploadFileInput"
-                );
-
-
-            const link =
-                document.getElementById(
-                    "uploadLink"
-                );
-
-
-            if (type === "tool") {
-
-                file.classList.add("hidden");
-
-                link.classList.remove(
-                    "hidden"
-                );
-
-            } else {
-
-                file.classList.remove(
-                    "hidden"
-                );
-
-                link.classList.add(
-                    "hidden"
-                );
-
-            }
-
-        }
-    );
-
+uploadTypeSelect.addEventListener("change", () => {
+    // Har category (Notes, Question Paper, Syllabus, etc.) par user se poochho:
+    // file upload karni hai ya link dena hai.
+    uploadMethodSelect.value = "";
+    updateUploadMethod();
+});
+uploadMethodSelect.addEventListener("change", updateUploadMethod);
+updateUploadMethod();
 
 
 /* =========================================
@@ -3486,53 +3701,39 @@ document
                     "uploadLink"
                 );
 
+            const uploadMethod =
+                document.getElementById("uploadMethod").value;
+
+            if (!uploadMethod) {
+                alert("Pehle choose karein: File upload karni hai ya Link dena hai.");
+                document.getElementById("uploadMethod").focus();
+                return;
+            }
 
             let finalLink = "";
 
-
             try {
-
-                if (type === "tool") {
-
-                    finalLink =
-                        linkInput.value;
-
+                if (uploadMethod === "link") {
+                    finalLink = linkInput.value.trim();
+                    if (!finalLink) {
+                        alert("Resource ka link paste karein.");
+                        linkInput.focus();
+                        return;
+                    }
                 } else {
-
-                    const file =
-                        fileInput.files[0];
-
-
-                    if (file) {
-
-                        finalLink =
-                            await new Promise(
-                                (resolve, reject) => {
-
-                                    const reader =
-                                        new FileReader();
-
-
-                                    reader.onload =
-                                        () =>
-                                            resolve(
-                                                reader.result
-                                            );
-
-
-                                    reader.onerror =
-                                        reject;
-
-
-                                    reader.readAsDataURL(
-                                        file
-                                    );
-
-                                }
-                            );
-
+                    const file = fileInput.files[0];
+                    if (!file) {
+                        alert("Upload karne ke liye file choose karein.");
+                        fileInput.focus();
+                        return;
                     }
 
+                    finalLink = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = () => resolve(reader.result);
+                        reader.onerror = reject;
+                        reader.readAsDataURL(file);
+                    });
                 }
 
 
@@ -3562,7 +3763,7 @@ document
                         "uploadForm"
                     )
                     .reset();
-
+                updateUploadMethod();
 
                 alert(
                     "Module successfully deployed!"
@@ -3674,14 +3875,12 @@ window.handleSendStudentMessage =
                 {
 
                     senderEmail: email,
-
+                    recipientEmail: "ramdayalguru99@gmail.com",
+                    senderRole: "student",
                     message: text,
-
                     reply: "",
-
-                    createdAt:
-                        new Date()
-                            .toISOString()
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString()
 
                 }
             );
@@ -3781,57 +3980,40 @@ function initMessagesSync() {
 
 
                     div.className =
-                        "bg-slate-950/70 border border-slate-800 rounded-xl p-4 space-y-3";
+                        "bg-slate-950/70 border border-slate-800 rounded-xl p-3 space-y-2";
 
 
                     div.innerHTML = `
 
-                        <div class="text-xs">
-
-                            <strong class="text-cyan-400">
-
-                                ${m.senderEmail}
-
-                            </strong>
-
+                        <div class="flex items-center justify-between gap-2 text-xs">
+                            <strong class="text-cyan-400 break-all">${m.senderEmail || "Student"}</strong>
+                            <span class="text-slate-500 shrink-0">Student</span>
                         </div>
 
-                        <p class="text-slate-200 text-sm">
+                        <div class="flex justify-start">
+                            <p class="max-w-[92%] bg-slate-800 text-slate-200 text-sm rounded-2xl rounded-tl-sm px-3 py-2 whitespace-pre-wrap break-words">${m.message || ""}</p>
+                        </div>
 
-                            ${m.message}
-
-                        </p>
+                        ${m.reply ? `<div class="flex justify-end"><p class="max-w-[92%] bg-emerald-950/60 border border-emerald-500/20 text-emerald-100 text-sm rounded-2xl rounded-tr-sm px-3 py-2 whitespace-pre-wrap break-words">${m.reply}</p></div>` : ""}
 
                         <textarea
                             id="replyInput_${m.id}"
-                            rows="2"
-                            placeholder="Type reply..."
-                            class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2">
-
-                            ${m.reply || ""}
-
-                        </textarea>
+                            rows="1"
+                            placeholder="Write a reply..."
+                            class="w-full resize-y min-h-[42px] max-h-24 text-sm bg-slate-900 border border-slate-800 rounded-lg p-2 focus:outline-none focus:border-emerald-500">${m.reply || ""}</textarea>
 
 
-                        <div class="flex gap-2">
-
+                        <div class="flex items-center gap-2">
                             <button
                                 onclick="sendAdminReply('${m.id}')"
-                                class="bg-emerald-600 text-white px-3 py-1.5 rounded">
-
-                                Reply
-
+                                class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg">
+                                Send Reply
                             </button>
-
-
                             <button
                                 onclick="deleteAdminMessage('${m.id}')"
-                                class="text-red-400 px-3">
-
+                                class="text-red-400 hover:bg-red-500/10 text-xs px-3 py-1.5 rounded-lg">
                                 Delete
-
                             </button>
-
                         </div>
 
                     `;
@@ -3856,12 +4038,11 @@ function initMessagesSync() {
 
                 messages
                     .filter(
-                        m =>
-                            (
-                                m.senderEmail || ""
-                            )
-                            .toLowerCase()
-                            === email
+                        m => {
+                            const sender = String(m.senderEmail || "").trim().toLowerCase();
+                            const recipient = String(m.recipientEmail || "").trim().toLowerCase();
+                            return sender === email || recipient === email;
+                        }
                     )
                     .forEach(m => {
 
@@ -3872,34 +4053,23 @@ function initMessagesSync() {
 
 
                         div.className =
-                            "bg-slate-950/70 border border-slate-800 rounded-xl p-4";
+                            "border border-slate-800 rounded-xl p-3 space-y-2 bg-slate-950/40";
 
 
                         div.innerHTML = `
-
-                            <p class="text-slate-300 text-sm">
-
-                                ${m.message}
-
-                            </p>
-
-                            <div
-                                class="mt-3 bg-emerald-950/30 border border-emerald-500/30 rounded-lg p-3">
-
-                                <strong class="text-emerald-400">
-
-                                    Guru Ramdayal Reply:
-
-                                </strong>
-
-                                <p class="text-slate-200 text-sm mt-1">
-
-                                    ${m.reply || "Awaiting admin response..."}
-
-                                </p>
-
+                            <div class="flex justify-end">
+                                <div class="max-w-[92%] bg-cyan-950/60 border border-cyan-500/20 rounded-2xl rounded-tr-sm px-3 py-2">
+                                    <div class="text-[10px] text-cyan-300 mb-1">YOU · MESSAGE</div>
+                                    <p class="text-slate-100 text-sm whitespace-pre-wrap break-words">${m.message || ""}</p>
+                                </div>
                             </div>
 
+                            <div class="flex justify-start">
+                                <div class="max-w-[92%] bg-emerald-950/40 border border-emerald-500/25 rounded-2xl rounded-tl-sm px-3 py-2">
+                                    <div class="text-[10px] text-emerald-300 mb-1">GURU RAMDAYAL · ADMIN</div>
+                                    <p class="text-slate-200 text-sm whitespace-pre-wrap break-words">${m.reply || "Awaiting admin response..."}</p>
+                                </div>
+                            </div>
                         `;
 
 
@@ -3920,50 +4090,40 @@ function initMessagesSync() {
    ADMIN REPLY
 ========================================= */
 
-window.sendAdminReply =
-    async function(id) {
+window.sendAdminReply = async function(id) {
+    const adminEmail = String(localStorage.getItem("btech_user_email") || "").trim().toLowerCase();
+    if (adminEmail !== "ramdayalguru99@gmail.com") {
+        alert("Only the administrator can send replies.");
+        return;
+    }
 
-        const reply =
-            document
-                .getElementById(
-                    `replyInput_${id}`
-                )
-                .value
-                .trim();
+    const input = document.getElementById(`replyInput_${id}`);
+    if (!input) {
+        alert("Reply box not found. Please refresh the page and try again.");
+        return;
+    }
 
+    const reply = input.value.trim();
+    if (!reply) {
+        alert("Please type a reply first.");
+        return;
+    }
 
-        try {
+    try {
+        // Keep the reply on the original student's message so it appears in that student's chat.
+        await setDoc(doc(db, "messages", id), {
+            reply: reply,
+            replyBy: adminEmail,
+            replyAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+        }, { merge: true });
 
-            await setDoc(
-                doc(
-                    db,
-                    "messages",
-                    id
-                ),
-                {
-                    reply
-                },
-                {
-                    merge: true
-                }
-            );
-
-
-            alert(
-                "Reply sent successfully!"
-            );
-
-
-        } catch (err) {
-
-            alert(
-                "Reply error: " +
-                err.message
-            );
-
-        }
-
-    };
+        alert("Reply saved. It should appear in the student's My Messages chat when their page is online.");
+    } catch (err) {
+        console.error("Admin reply error:", err);
+        alert("Reply could not be sent: " + (err.message || "Unknown error") + "\n\nIf it says 'Missing or insufficient permissions', update your Firestore Rules to allow the admin to update messages.");
+    }
+};
 
 
 
@@ -4102,45 +4262,56 @@ document
    BLOCK USER
 ========================================= */
 
-window.toggleBlockUser =
-    async function(
-        email,
-        status
-    ) {
+window.toggleBlockUser = async function(email, status) {
+    const normalizedEmail = String(email || "").trim().toLowerCase();
+    if (!normalizedEmail) {
+        alert("User email missing.");
+        return;
+    }
 
-        try {
+    try {
+        // Update every Firestore user document for this email. Older versions of
+        // the site may have stored users under auto-generated document IDs.
+        const usersSnapshot = await getDocs(
+            query(collection(db, "users"), where("email", "==", normalizedEmail))
+        );
 
-            await setDoc(
-                doc(
-                    db,
-                    "users",
-                    email
-                ),
-                {
-                    isBlocked: status
-                },
-                {
-                    merge: true
-                }
+        if (usersSnapshot.empty) {
+            // Compatibility with accounts stored using the email as document ID.
+            await setDoc(doc(db, "users", normalizedEmail), {
+                email: normalizedEmail,
+                isBlocked: status
+            }, { merge: true });
+        } else {
+            const writes = usersSnapshot.docs.map(userDoc =>
+                setDoc(doc(db, "users", userDoc.id), { isBlocked: status }, { merge: true })
             );
-
-
-            alert(
-                "User status updated."
-            );
-
-
-        } catch (err) {
-
-            alert(
-                "Error: " +
-                err.message
-            );
-
+            await Promise.all(writes);
         }
 
-    };
+        // Also update the email-keyed record if it exists from an older version.
+        const emailDoc = await getDocs(
+            query(collection(db, "users"), where("email", "==", normalizedEmail))
+        );
+        if (emailDoc.empty) {
+            await setDoc(doc(db, "users", normalizedEmail), {
+                email: normalizedEmail,
+                isBlocked: status
+            }, { merge: true });
+        }
 
+        // Immediately log out this tab too if the admin blocked the currently signed-in user.
+        const currentEmail = String(localStorage.getItem("btech_user_email") || "").trim().toLowerCase();
+        if (status === true && currentEmail === normalizedEmail) {
+            forceLogoutBlockedAccount("This account has been blocked and logged out.");
+        }
+
+        alert(status ? "User blocked successfully." : "User unblocked successfully.");
+    } catch (err) {
+        console.error("Block/unblock user failed:", err);
+        alert("User status update failed. Firebase Firestore Rules/permissions check karein. Details: " + err.message);
+    }
+};
 
 
 /* =====================================================
@@ -4400,6 +4571,32 @@ async function vaultDeleteFile(id, name) {
     alert("Delete failed. Firebase Firestore rules check karein: " + err.message);
   }
 }
+
+
+// About dialog controls
+const aboutPortal = document.getElementById("aboutPortal");
+const openAboutBtn = document.getElementById("openAboutBtn");
+const closeAboutBtn = document.getElementById("closeAboutBtn");
+function openAboutDialog() {
+  if (!aboutPortal) return;
+  aboutPortal.classList.remove("hidden");
+  document.body.classList.add("overflow-hidden");
+  closeAboutBtn?.focus();
+}
+function closeAboutDialog() {
+  if (!aboutPortal) return;
+  aboutPortal.classList.add("hidden");
+  document.body.classList.remove("overflow-hidden");
+  openAboutBtn?.focus();
+}
+openAboutBtn?.addEventListener("click", openAboutDialog);
+closeAboutBtn?.addEventListener("click", closeAboutDialog);
+aboutPortal?.addEventListener("click", (event) => {
+  if (event.target === aboutPortal) closeAboutDialog();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && aboutPortal && !aboutPortal.classList.contains("hidden")) closeAboutDialog();
+});
 
 </script>
 
